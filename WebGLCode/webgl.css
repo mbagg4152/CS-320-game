@@ -1,0 +1,11 @@
+
+canvas {
+    border: 2px solid black;
+    background-color: black;
+    width: auto;
+    height: 40%;
+}
+
+video {
+    display: none;
+}

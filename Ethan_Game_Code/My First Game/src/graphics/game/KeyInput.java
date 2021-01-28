@@ -23,14 +23,14 @@ public class KeyInput extends KeyAdapter {
             GameObject tempObject = handler.object.get(i);
 
             if (tempObject.getId() == ID.Player) {
-                if (key == KeyEvent.VK_UP) {
-                    up = true;
-                    tempObject.setVelY(-playerSpeed);
-                }
-                if (key == KeyEvent.VK_DOWN) {
-                    dp = true;
-                    tempObject.setVelY(playerSpeed);
-                }
+//                if (key == KeyEvent.VK_UP) {
+//                    up = true;
+//                    tempObject.setVelY(-playerSpeed);
+//                }
+//                if (key == KeyEvent.VK_DOWN) {
+//                    dp = true;
+//                    tempObject.setVelY(playerSpeed);
+//                }
                 if (key == KeyEvent.VK_LEFT) {
                     lp = true;
                     tempObject.setVelX(-playerSpeed);
@@ -53,16 +53,16 @@ public class KeyInput extends KeyAdapter {
             GameObject tempObject = handler.object.get(i);
 
             if (tempObject.getId() == ID.Player) {
-                if (key == KeyEvent.VK_UP) {
-                    up = false;
-                    if (dp) tempObject.setVelY(playerSpeed);
-                    else tempObject.setVelY(0);
-                }
-                if (key == KeyEvent.VK_DOWN) {
-                    dp = false;
-                    if (up) tempObject.setVelY(-playerSpeed);
-                    else tempObject.setVelY(0);
-                }
+//                if (key == KeyEvent.VK_UP) {
+//                    up = false;
+//                    if (dp) tempObject.setVelY(playerSpeed);
+//                    else tempObject.setVelY(0);
+//                }
+//                if (key == KeyEvent.VK_DOWN) {
+//                    dp = false;
+//                    if (up) tempObject.setVelY(-playerSpeed);
+//                    else tempObject.setVelY(0);
+//                }
                 if (key == KeyEvent.VK_LEFT) {
                     lp = false;
                     if (rp) tempObject.setVelX(playerSpeed);

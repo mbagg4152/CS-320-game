@@ -1,25 +1,24 @@
 package graphics.game;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
 
     private static final long serialVersionUID = 1442501350474703598L;
-
     public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 
     private Thread thread;
-
     private Random randObj;
     private Handler gameHandler;
     private HUD hud;
     private Spawn spawner;
-
     private boolean running = false;
+
 
     public Game() {
         gameHandler = new Handler();
@@ -102,6 +101,7 @@ public class Game extends Canvas implements Runnable {
 
     }
 
+
     public static int clamp(int var, int min, int max) {
         if (var >= max) return var = max;
         else if (var <= min) return var = min;
@@ -109,7 +109,20 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        new Game();
+//
+        JFrame mainFrame = new JFrame("Run! Dodge! Run!");
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setSize(500, 500);
+        mainFrame.setLayout(new GridBagLayout());
+        JButton button = new JButton("Start the game!");
+        mainFrame.add(button, new GridBagConstraints());
+        mainFrame.setVisible(true);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Game();
+                mainFrame.dispose();
+            }
+        });
     }
 }

@@ -52,7 +52,6 @@ public class Player extends GameObject {
 
     @Override
     public Rectangle getBounds() {
-        // TODO Auto-generated method stub
         return new Rectangle(x, y, 32, 32);
     }
 
@@ -63,7 +62,6 @@ public class Player extends GameObject {
             if (tempObject.getId() == ID.BasicEnemy) {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     HUD.HEALTH -= 2;
-
                 }
             }
         }

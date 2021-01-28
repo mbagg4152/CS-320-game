@@ -1,18 +1,29 @@
 package graphics.game;
 
 import javax.imageio.ImageIO;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
 
 public class Player extends GameObject {
 
     private Handler handler;
+    BufferedImage playerIcon = null;
 
     public Player(int x, int y, ID id, Handler handler) {
         super(x, y, id);
         this.handler = handler;
+        getPlayerIcon();
+
+    }
+
+    private void getPlayerIcon() {
+        try {
+            playerIcon = ImageIO.read(new File(System.getProperty("user.dir") + "/res/player.png"));
+        } catch (Exception e) {
+            System.out.println("error loading image file: " + e.toString());
+        }
     }
 
     public void tick() {
@@ -29,12 +40,13 @@ public class Player extends GameObject {
     public void render(Graphics g) {
         g.setColor(Color.white);
         g.fillRect(x, y, 32, 32);
-        BufferedImage playerIcon = null;
-//        try {
-//            playerIcon= ImageIO.read(new File(""))
-//        } catch (Exception e) {
-//            System.out.println("error loading image file");
-//        }
+
+        g.drawImage(playerIcon, x, y, 32, 32, new ImageObserver() {
+            @Override
+            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+                return false;
+            }
+        });
 
     }
 

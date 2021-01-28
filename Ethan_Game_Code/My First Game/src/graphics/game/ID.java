@@ -1,4 +1,4 @@
-package com.tutorial.main;
+package graphics.game;
 
 public enum ID {
 		

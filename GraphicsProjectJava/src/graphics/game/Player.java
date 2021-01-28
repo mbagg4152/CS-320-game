@@ -40,7 +40,7 @@ public class Player extends GameObject {
     public void render(Graphics g) {
         g.setColor(Color.white);
         g.fillRect(x, y, 32, 32);
-
+        getPlayerIcon();
         g.drawImage(playerIcon, x, y, 32, 32, new ImageObserver() {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {

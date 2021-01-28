@@ -14,26 +14,25 @@ public class Game extends Canvas implements Runnable {
 
     private Thread thread;
 
-    private Random r;
-    private Handler handler;
+    private Random randObj;
+    private Handler gameHandler;
     private HUD hud;
     private Spawn spawner;
 
     private boolean running = false;
 
     public Game() {
-        handler = new Handler();
+        gameHandler = new Handler();
         hud = new HUD();
-        spawner = new Spawn(handler, hud);
-        this.addKeyListener(new KeyInput(handler));
+        spawner = new Spawn(gameHandler, hud);
+        this.addKeyListener(new KeyInput(gameHandler));
 
         new Window(WIDTH, HEIGHT, "MY FIRST GAME", this);
 
-        r = new Random();
+        randObj = new Random();
 
-        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
-        //for(int i = 0; i<20 ; i++)
-        handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
+        gameHandler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, gameHandler));
+        gameHandler.addObject(new BasicEnemy(randObj.nextInt(WIDTH), randObj.nextInt(HEIGHT), ID.BasicEnemy, gameHandler));
 
 
         this.requestFocusInWindow();
@@ -60,7 +59,6 @@ public class Game extends Canvas implements Runnable {
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
-        int frames = 0;
         while (running) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -69,21 +67,17 @@ public class Game extends Canvas implements Runnable {
                 tick();
                 delta--;
             }
-            if (running)
-                render();
-            frames++;
+            if (running) render();
 
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                //System.out.println("FPS: " + frames);
-                frames = 0;
             }
         }
         stop();
     }
 
     private void tick() {
-        handler.tick();
+        gameHandler.tick();
         hud.tick();
         spawner.tick();
     }
@@ -100,7 +94,7 @@ public class Game extends Canvas implements Runnable {
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
-        handler.render(g);
+        gameHandler.render(g);
         hud.render(g);
 
         g.dispose();
@@ -109,16 +103,12 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static int clamp(int var, int min, int max) {
-        if (var >= max)
-            return var = max;
-        else if (var <= min)
-            return var = min;
-        else
-            return var;
+        if (var >= max) return var = max;
+        else if (var <= min) return var = min;
+        else return var;
     }
 
     public static void main(String[] args) {
-
         new Game();
     }
 }

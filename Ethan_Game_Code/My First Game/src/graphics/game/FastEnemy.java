@@ -10,18 +10,13 @@ public class FastEnemy extends GameObject{
 
 	public FastEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
-		
 		velX = 9;
 		velY = 9;
-		
 		this.handler = handler;
-				
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
 		x += velX;
 		y += velY;
 		
@@ -33,14 +28,12 @@ public class FastEnemy extends GameObject{
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
 		g.setColor(Color.blue);
 		g.fillRect(x, y, 16, 16);
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
 		return new Rectangle(x,y,10,10);
 	}
 

@@ -26,8 +26,17 @@ public class BigEnemy extends GameItems {
     public void tick() {
         x += velX;
         y += velY;
-        if (y <= 0 || y >= Game.HEIGHT - 32) velY *= -1;
-        if (x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
+        if (y <= 0 || y >= Game.HEIGHT - 1) velY *= -1;
+        if (x <= 0 || x >= Game.WIDTH - 1) velX *= -1;
+        for (int i = 0; i < handler.gameItems.size(); i++) {
+            GameItems tempObject = handler.gameItems.get(i);
+            if (tempObject.getId() == ID.Player) {
+                if (getBounds().intersects(tempObject.getBounds())) {
+                    velY *= -1;
+                    velX *= -1;
+                }
+            }
+        }
     }
 
     private void getIcon() {
@@ -59,7 +68,7 @@ public class BigEnemy extends GameItems {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, BOUND_BIG, BOUND_BIG);
+        return new Rectangle(x, y, SIZE_BIG, SIZE_BIG);
     }
 
 }

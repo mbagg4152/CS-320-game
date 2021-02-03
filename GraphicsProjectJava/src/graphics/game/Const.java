@@ -26,12 +26,7 @@ public class Const {
 
     // sizes
     public static final int SIZE_PLAYER = 64;
-    public static final int SIZE_BIG = 72;
-    public static final int SIZE_BASIC = 48;
-
-    // bounds
-    public static final int BOUND_PLAYER = 32;
-    public static final int BOUND_BIG = 48;
-    public static final int BOUND_BASIC = 16;
+    public static final int SIZE_BIG = 48;
+    public static final int SIZE_BASIC = 24;
 
 }

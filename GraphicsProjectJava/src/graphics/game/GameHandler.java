@@ -11,7 +11,7 @@ public class GameHandler {
     public void tick() {
         // do not replace with enhanced for loop no matter how much intelli j bugs you about it!
         for (int i = 0; i < gameItems.size(); i++) {
-            if (Game.getPlayerDead()) {
+            if (Game.isPlayerDead()) {
                 break;
             }
             GameItems tempObject = gameItems.get(i);
@@ -23,7 +23,7 @@ public class GameHandler {
     public void render(Graphics g) {
         // do not replace with enhanced for loop no matter how much intelli j bugs you about it!
         for (int i = 0; i < gameItems.size(); i++) {
-            if (Game.getPlayerDead()) {
+            if (Game.isPlayerDead()) {
                 break;
             }
             GameItems tempObject = gameItems.get(i);

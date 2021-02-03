@@ -129,7 +129,7 @@ public class Game extends Canvas implements Runnable {
         double delta = 0;
         long timer = System.currentTimeMillis();
         while (running) {
-            if (getPlayerDead()) {
+            if (isPlayerDead()) {
                 gHandler.removeAll();
                 GameFrame.deleteWindow();
                 resetGameVals();
@@ -188,7 +188,7 @@ public class Game extends Canvas implements Runnable {
         else return var;
     }
 
-    public static boolean getPlayerDead() {
+    public static boolean isPlayerDead() {
         return playerDead;
     }
 

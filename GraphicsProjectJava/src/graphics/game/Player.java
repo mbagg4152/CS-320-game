@@ -19,6 +19,7 @@ public class Player extends GameItems {
     boolean noIcon = false;
     private GameHandler handler;
     Clip hitSound;
+    AudioInputStream sound;
 
     public Player(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
@@ -28,13 +29,15 @@ public class Player extends GameItems {
     }
 
     public void loadHitSound() {
-        AudioInputStream sound;
-        try {
-            sound = AudioSystem.getAudioInputStream(new File(OOF_ROBLOX));
-            hitSound = AudioSystem.getClip();
-            hitSound.open(sound);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
-            System.out.println("Error loading the sound file: " + e.getMessage() + " " + e.getClass());
+
+        if (Objects.isNull(sound)) {
+            try {
+                sound = AudioSystem.getAudioInputStream(new File(OOF_ROBLOX));
+                hitSound = AudioSystem.getClip();
+                hitSound.open(sound);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
+                System.out.println("Error loading the sound file: " + e.getMessage() + " " + e.getClass());
+            }
         }
 
     }
@@ -76,23 +79,24 @@ public class Player extends GameItems {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, BOUND_PLAYER, BOUND_PLAYER);
+        return new Rectangle(x, y, SIZE_PLAYER, SIZE_PLAYER);
     }
 
     public void collision() {
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
 
-            if (tempObject.getId() == ID.BasicEnemy) {
+            if (tempObject.getId() == ID.BasicEnemy || tempObject.getId() == ID.BigEnemy) {
+
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    System.out.println("BONK");
+                    System.out.println("BONK " + HUD.playerHealth);
                     if (Objects.nonNull(hitSound)) {
                         hitSound.start();
                     } else {
                         System.out.println("Sound is null");
                     }
 
-                    HUD.playerHealth -= 2;
+                    HUD.playerHealth -= 1;
                     if (HUD.playerHealth <= 0) {
                         Game.setPlayerDead(true);
                     }

@@ -10,6 +10,8 @@ public class BasicEnemy extends GameObject {
     
     private GameHandler handler;
     BufferedImage enemyIcon = null;
+    private boolean noImage = false;
+    Color enemyColor = new Color(183, 61, 185);
     
     public BasicEnemy(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
@@ -29,31 +31,34 @@ public class BasicEnemy extends GameObject {
         //handler.addObject(new Trail(x, y, ID.Trail, Color.red, 16, 16, 0.1f, handler));
     }
     
-    private void getBasicEnemyIcon() {
+    private void getIcon() {
         try {
             enemyIcon = ImageIO.read(new File(System.getProperty("user.dir") + "/res/basicEnemy.png"));
+            
         } catch (Exception e) {
             System.out.println("error loading basic enemy image file: " + e.toString());
+            noImage = true;
+            
         }
     }
     
     public void render(Graphics g) {
-        
-        //g.fillRect(x, y, 32, 32);
-        getBasicEnemyIcon();
-        g.drawImage(enemyIcon, x, y, 48, 48, new ImageObserver() {
-            @Override
-            public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
-                return false;
-            }
-        });
+        if (noImage) {
+            g.setColor(enemyColor);
+            g.fillRect(x, y, 28, 28);
+            g.drawRect(x, y, 28, 28);
+        } else {
+            getIcon();
+            g.drawImage(enemyIcon, x, y, 48, 48, new ImageObserver() {
+                @Override
+                public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
+                    return false;
+                }
+            });
+            
+        }
         
     }
-//    @Override
-//    public void render(Graphics g) {
-//        g.setColor(Color.red);
-//        g.fillRect(x, y, 16, 16);
-//    }
     
     @Override
     public Rectangle getBounds() {

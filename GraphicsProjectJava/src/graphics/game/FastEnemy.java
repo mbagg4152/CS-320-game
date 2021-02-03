@@ -10,6 +10,8 @@ public class FastEnemy extends GameObject {
     
     private GameHandler handler;
     BufferedImage enemyIcon = null;
+    private boolean noImage = false;
+    Color enemyColor = new Color(0, 85, 218);
     
     public FastEnemy(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
@@ -24,36 +26,36 @@ public class FastEnemy extends GameObject {
         
         if (y <= 0 || y >= Game.HEIGHT - 32) velY *= -1;
         if (x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
-        
-        handler.addObject(new Trail(x, y, ID.Trail, Color.blue, 10, 10, 0.01f, handler));
+
+//        handler.addObject(new Trail(x, y, ID.Trail, Color.blue, 10, 10, 0.01f, handler));
     }
     
-    private void getFastEnemyIcon() {
+    private void getIcon() {
         try {
-            enemyIcon = ImageIO.read(new File(System.getProperty("user.dir") + "/res/fastEnemy.png"));
+            enemyIcon = ImageIO.read(new File(System.getProperty("user.dir") + "/res/enemyIdea1.png"));
+            
         } catch (Exception e) {
             System.out.println("error loading fast enemy image file: " + e.toString());
+            noImage = true;
         }
     }
     
     public void render(Graphics g) {
-        
-        //g.fillRect(x, y, 32, 32);
-        getFastEnemyIcon();
-        g.drawImage(enemyIcon, x, y, 16, 16, new ImageObserver() {
-            @Override
-            public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
-                return false;
-            }
-        });
-        
+        if (noImage) {
+            g.setColor(enemyColor);
+            g.fillRect(x, y, 24, 24);
+            g.drawRect(x, y, 24, 24);
+        } else {
+            getIcon();
+            g.drawImage(enemyIcon, x, y, 48, 48, new ImageObserver() {
+                @Override
+                public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
+                    return false;
+                }
+            });
+            
+        }
     }
-
-//	@Override
-//	public void render(Graphics g) {
-//		g.setColor(Color.blue);
-//		g.fillRect(x, y, 16, 16);
-//	}
     
     @Override
     public Rectangle getBounds() {

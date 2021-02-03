@@ -10,19 +10,22 @@ public class Player extends GameObject {
     
     private GameHandler handler;
     BufferedImage playerIcon = null;
+    boolean noImage = false;
+    Color playerColor = new Color(103, 0, 38);
     
     public Player(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
         this.handler = handler;
-        getPlayerIcon();
+        getIcon();
         
     }
     
-    private void getPlayerIcon() {
+    private void getIcon() {
         try {
             playerIcon = ImageIO.read(new File(System.getProperty("user.dir") + "/res/player.png"));
         } catch (Exception e) {
             System.out.println("error loading player image file: " + e.toString());
+            noImage = true;
         }
     }
     
@@ -37,15 +40,19 @@ public class Player extends GameObject {
     }
     
     public void render(Graphics g) {
-        
-        g.fillRect(x, y, 32, 32);
-        getPlayerIcon();
-        g.drawImage(playerIcon, x, y, 64, 64, new ImageObserver() {
-            @Override
-            public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
-                return false;
-            }
-        });
+        if (noImage) {
+            g.setColor(playerColor);
+            g.fillRect(x, y, 32, 32);
+            g.drawRect(x, y, 32, 32);
+        } else {
+            getIcon();
+            g.drawImage(playerIcon, x, y, 64, 64, new ImageObserver() {
+                @Override
+                public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
+                    return false;
+                }
+            });
+        }
         
     }
     

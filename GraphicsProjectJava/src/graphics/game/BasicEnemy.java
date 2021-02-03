@@ -10,13 +10,13 @@ public class BasicEnemy extends GameObject {
     
     private GameHandler handler;
     BufferedImage enemyIcon = null;
-    private boolean noImage = false;
+    private boolean noIcon = false;
     Color enemyColor = new Color(183, 61, 185);
     
     public BasicEnemy(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
-        velX = 5;
-        velY = 5;
+        velX = 3;
+        velY = 3;
         this.handler = handler;
     }
     
@@ -37,13 +37,13 @@ public class BasicEnemy extends GameObject {
             
         } catch (Exception e) {
             System.out.println("error loading basic enemy image file: " + e.toString());
-            noImage = true;
+            noIcon = true;
             
         }
     }
     
     public void render(Graphics g) {
-        if (noImage) {
+        if (noIcon) {
             g.setColor(enemyColor);
             g.fillRect(x, y, 28, 28);
             g.drawRect(x, y, 28, 28);

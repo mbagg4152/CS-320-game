@@ -10,13 +10,13 @@ public class FastEnemy extends GameObject {
     
     private GameHandler handler;
     BufferedImage enemyIcon = null;
-    private boolean noImage = false;
+    private boolean noIcon = false;
     Color enemyColor = new Color(0, 85, 218);
     
     public FastEnemy(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
-        velX = 9;
-        velY = 9;
+        velX = 6;
+        velY = 6;
         this.handler = handler;
     }
     
@@ -36,12 +36,12 @@ public class FastEnemy extends GameObject {
             
         } catch (Exception e) {
             System.out.println("error loading fast enemy image file: " + e.toString());
-            noImage = true;
+            noIcon = true;
         }
     }
     
     public void render(Graphics g) {
-        if (noImage) {
+        if (noIcon) {
             g.setColor(enemyColor);
             g.fillRect(x, y, 24, 24);
             g.drawRect(x, y, 24, 24);

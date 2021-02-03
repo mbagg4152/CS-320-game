@@ -10,7 +10,7 @@ public class Player extends GameObject {
     
     private GameHandler handler;
     BufferedImage playerIcon = null;
-    boolean noImage = false;
+    boolean noIcon = false;
     Color playerColor = new Color(103, 0, 38);
     
     public Player(int x, int y, ID id, GameHandler handler) {
@@ -25,7 +25,7 @@ public class Player extends GameObject {
             playerIcon = ImageIO.read(new File(System.getProperty("user.dir") + "/res/player.png"));
         } catch (Exception e) {
             System.out.println("error loading player image file: " + e.toString());
-            noImage = true;
+            noIcon = true;
         }
     }
     
@@ -40,7 +40,7 @@ public class Player extends GameObject {
     }
     
     public void render(Graphics g) {
-        if (noImage) {
+        if (noIcon) {
             g.setColor(playerColor);
             g.fillRect(x, y, 32, 32);
             g.drawRect(x, y, 32, 32);
@@ -56,8 +56,7 @@ public class Player extends GameObject {
         
     }
     
-    @Override
-    public Rectangle getBounds() {
+    @Override public Rectangle getBounds() {
         return new Rectangle(x, y, 32, 32);
     }
     
@@ -68,6 +67,9 @@ public class Player extends GameObject {
             if (tempObject.getId() == ID.BasicEnemy) {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     HUD.HEALTH -= 2;
+                    if (HUD.HEALTH <= 0) {
+                        Game.setPlayerDead(true);
+                    }
                 }
             }
         }

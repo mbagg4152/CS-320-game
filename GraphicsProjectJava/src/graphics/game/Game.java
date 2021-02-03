@@ -25,6 +25,7 @@ public class Game extends Canvas implements Runnable {
     private Spawn spawner;
     private boolean running = false;
     public static Color bgMain, fgBtn, bgBtn, fgTitle;
+    private static boolean playerDead = false;
     
     public static void main(String[] args) {
         assignObjectValues();
@@ -115,6 +116,10 @@ public class Game extends Canvas implements Runnable {
         double delta = 0;
         long timer = System.currentTimeMillis();
         while (running) {
+            if (getPlayerDead()) {
+                stop();
+                new Game();
+            }
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
@@ -157,9 +162,16 @@ public class Game extends Canvas implements Runnable {
     }
     
     public static int clamp(int var, int min, int max) {
-        if (var >= max) return var = max;
-        else if (var <= min) return var = min;
+        if (var >= max) return max;
+        else if (var <= min) return min;
         else return var;
     }
     
+    public static boolean getPlayerDead() {
+        return playerDead;
+    }
+    
+    public static void setPlayerDead(boolean state) {
+        playerDead = state;
+    }
 }

@@ -95,8 +95,12 @@ public class Player extends GameItems {
                     } else {
                         System.out.println("Sound is null");
                     }
+                    if (tempObject.getId() == ID.BasicEnemy) {
+                        HUD.playerHealth -= 1;
+                    } else {
+                        HUD.playerHealth -= 4;
+                    }
 
-                    HUD.playerHealth -= 1;
                     if (HUD.playerHealth <= 0) {
                         Game.setPlayerDead(true);
                     }

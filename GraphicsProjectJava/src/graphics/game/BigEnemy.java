@@ -40,6 +40,8 @@ public class BigEnemy extends GameItems {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     velY *= -1;
                     velX *= -1;
+                    setY(y - SIZE_PLAYER + 15);
+                    setX(x - SIZE_PLAYER + 15);
                 }
             }
         }

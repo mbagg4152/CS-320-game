@@ -8,7 +8,7 @@ import java.io.File;
 
 import static graphics.game.Const.*;
 
-public class BasicEnemy extends GameObject {
+public class BasicEnemy extends GameItems {
 
     private GameHandler handler;
     BufferedImage enemyIcon = null;
@@ -16,8 +16,8 @@ public class BasicEnemy extends GameObject {
 
     public BasicEnemy(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
-        velX = 3;
-        velY = 3;
+        velX = 5;
+        velY = 5;
         this.handler = handler;
     }
 
@@ -32,7 +32,7 @@ public class BasicEnemy extends GameObject {
 
     private void getIcon() {
         try {
-            enemyIcon = ImageIO.read(new File(System.getProperty("user.dir") + BASIC_ENEMY_ICON));
+            enemyIcon = ImageIO.read(new File(PATH_BASIC_ICON));
 
         } catch (Exception e) {
             System.out.println("error loading basic enemy image file: " + e.toString());
@@ -44,11 +44,11 @@ public class BasicEnemy extends GameObject {
     public void render(Graphics g) {
         if (noIcon) {
             g.setColor(COLOR_BASIC);
-            g.fillRect(x, y, 28, 28);
-            g.drawRect(x, y, 28, 28);
+            g.fillRect(x, y, SIZE_BASIC, SIZE_BASIC);
+            g.drawRect(x, y, SIZE_BASIC, SIZE_BASIC);
         } else {
             getIcon();
-            g.drawImage(enemyIcon, x, y, 48, 48, new ImageObserver() {
+            g.drawImage(enemyIcon, x, y, SIZE_BASIC, SIZE_BASIC, new ImageObserver() {
                 @Override
                 public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
                     return false;
@@ -61,7 +61,7 @@ public class BasicEnemy extends GameObject {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 16, 16);
+        return new Rectangle(x, y, BOUND_BASIC, BOUND_BASIC);
     }
 
 }

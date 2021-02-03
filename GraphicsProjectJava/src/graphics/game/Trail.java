@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-public class Trail extends GameObject {
+public class Trail extends GameItems {
     
     private float alpha = 1;
     private int width;

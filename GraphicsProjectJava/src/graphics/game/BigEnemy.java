@@ -8,17 +8,17 @@ import java.io.File;
 
 import static graphics.game.Const.*;
 
-public class FastEnemy extends GameObject {
+public class BigEnemy extends GameItems {
 
     private GameHandler handler;
     BufferedImage enemyIcon = null;
     private boolean noIcon = false;
 
 
-    public FastEnemy(int x, int y, ID id, GameHandler handler) {
+    public BigEnemy(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
-        velX = 6;
-        velY = 6;
+        velX = 2;
+        velY = 2;
         this.handler = handler;
     }
 
@@ -26,16 +26,13 @@ public class FastEnemy extends GameObject {
     public void tick() {
         x += velX;
         y += velY;
-
         if (y <= 0 || y >= Game.HEIGHT - 32) velY *= -1;
         if (x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
-
-//        handler.addObject(new Trail(x, y, ID.Trail, Color.blue, 10, 10, 0.01f, handler));
     }
 
     private void getIcon() {
         try {
-            enemyIcon = ImageIO.read(new File(System.getProperty("user.dir") + FAST_ENEMY_ICON));
+            enemyIcon = ImageIO.read(new File(PATH_BIG_ICON));
 
         } catch (Exception e) {
             System.out.println("error loading fast enemy image file: " + e.toString());
@@ -45,12 +42,12 @@ public class FastEnemy extends GameObject {
 
     public void render(Graphics g) {
         if (noIcon) {
-            g.setColor(COLOR_FAST);
-            g.fillRect(x, y, 24, 24);
-            g.drawRect(x, y, 24, 24);
+            g.setColor(COLOR_BIG);
+            g.fillRect(x, y, SIZE_BIG, SIZE_BIG);
+            g.drawRect(x, y, SIZE_BIG, SIZE_BIG);
         } else {
             getIcon();
-            g.drawImage(enemyIcon, x, y, 48, 48, new ImageObserver() {
+            g.drawImage(enemyIcon, x, y, SIZE_BIG, SIZE_BIG, new ImageObserver() {
                 @Override
                 public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
                     return false;
@@ -62,7 +59,7 @@ public class FastEnemy extends GameObject {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 10, 10);
+        return new Rectangle(x, y, BOUND_BIG, BOUND_BIG);
     }
 
 }

@@ -30,7 +30,7 @@ public class Spawn {
             }
             if (levelKeep == 5) {
                 levelKeep = 0;
-                handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
+                handler.addObject(new BigEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
             }
         }
         

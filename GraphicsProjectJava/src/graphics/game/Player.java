@@ -9,6 +9,7 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.Objects;
 
 import static graphics.game.Const.*;
@@ -25,22 +26,22 @@ public class Player extends GameItems {
         super(x, y, id);
         this.handler = handler;
         getIcon();
-        loadHitSound();
+//        loadHitSound();
     }
 
-    public void loadHitSound() {
-
-        if (Objects.isNull(sound)) {
-            try {
-                sound = AudioSystem.getAudioInputStream(new File(OOF_ROBLOX));
-                hitSound = AudioSystem.getClip();
-                hitSound.open(sound);
-            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
-                System.out.println("Error loading the sound file: " + e.getMessage() + " " + e.getClass());
-            }
-        }
-
-    }
+//    public void loadHitSound() {
+//
+//        if (Objects.isNull(sound)) {
+//            try {
+//                sound = AudioSystem.getAudioInputStream(new File(OOF_ROBLOX));
+//                hitSound = AudioSystem.getClip();
+//                hitSound.open(sound);
+//            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
+//                System.out.println("Error loading the sound file: " + e.getMessage() + " " + e.getClass());
+//            }
+//        }
+//
+//    }
 
     private void getIcon() {
         try {
@@ -90,11 +91,8 @@ public class Player extends GameItems {
 
                 if (getBounds().intersects(tempObject.getBounds())) {
                     System.out.println("BONK " + HUD.playerHealth);
-                    if (Objects.nonNull(hitSound)) {
-                        hitSound.start();
-                    } else {
-                        System.out.println("Sound is null");
-                    }
+                    new HitSound();
+
                     if (tempObject.getId() == ID.BasicEnemy) {
                         HUD.playerHealth -= 1;
                     } else {
@@ -108,5 +106,19 @@ public class Player extends GameItems {
             }
         }
     }
+
+//    public void loadHitSound() {
+//
+//        AudioInputStream sound;
+//        try {
+//            sound = AudioSystem.getAudioInputStream(new File(OOF_ROBLOX));
+//            hitSound = AudioSystem.getClip();
+//            hitSound.open(sound);
+////            hitSound.start();
+//        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
+//            System.out.println("Error loading the sound file: " + Arrays.toString(e.getStackTrace()));
+//        }
+//
+//    }
 
 }

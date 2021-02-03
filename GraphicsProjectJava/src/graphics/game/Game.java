@@ -1,5 +1,6 @@
 package graphics.game;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -7,8 +8,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serial;
+import java.util.Arrays;
 import java.util.Random;
+
+import static graphics.game.Const.OOF_ROBLOX;
 
 public class Game extends Canvas implements Runnable {
 
@@ -29,6 +35,7 @@ public class Game extends Canvas implements Runnable {
     private static boolean playerDead = false;
     private static GameFrame mainGameFrame;
     private static Player character;
+    public static Clip hitSound;
 
     public static void main(String[] args) {
         assignObjectValues();
@@ -200,4 +207,6 @@ public class Game extends Canvas implements Runnable {
     public static Rectangle getPlayerBounds() {
         return character.getBounds();
     }
+
+
 }

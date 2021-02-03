@@ -39,6 +39,8 @@ public class BasicEnemy extends GameItems {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     velY *= -1;
                     velX *= -1;
+                    setY(y + 16);
+                    setX(x + 16);
                 }
             }
         }

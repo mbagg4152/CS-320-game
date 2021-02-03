@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
+import java.util.Random;
 
 import static graphics.game.Const.*;
 
@@ -19,6 +20,11 @@ public class BasicEnemy extends GameItems {
         velX = 5;
         velY = 5;
         this.handler = handler;
+        int randDiff = new Random().nextInt((int) Game.HEIGHT / 2);
+        if (getBounds().intersects(Game.getPlayerBounds())) {
+            setX(-x + randDiff);
+            setY(y - randDiff);
+        }
     }
 
     @Override
@@ -72,4 +78,11 @@ public class BasicEnemy extends GameItems {
         return new Rectangle(x, y, SIZE_BASIC, SIZE_BASIC);
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }

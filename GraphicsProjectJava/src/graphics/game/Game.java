@@ -28,6 +28,7 @@ public class Game extends Canvas implements Runnable {
     public static Color bgMain, fgBtn, bgBtn, fgTitle;
     private static boolean playerDead = false;
     private static GameFrame mainGameFrame;
+    private static Player character;
 
     public static void main(String[] args) {
         assignObjectValues();
@@ -91,8 +92,8 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(gHandler));
         mainGameFrame = new GameFrame(WIDTH, HEIGHT, "Run! Dodge! Run!", this);
         randObj = new Random();
-
-        gHandler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, gHandler));
+        character = new Player((WIDTH / 2) - 32, (HEIGHT / 2) - 32, ID.Player, gHandler);
+        gHandler.addObject(character);
         gHandler.addObject(new BasicEnemy(randObj.nextInt(WIDTH), randObj.nextInt(HEIGHT), ID.BasicEnemy, gHandler));
 
         this.requestFocusInWindow();
@@ -194,5 +195,9 @@ public class Game extends Canvas implements Runnable {
 
     public static void setPlayerDead(boolean state) {
         playerDead = state;
+    }
+
+    public static Rectangle getPlayerBounds() {
+        return character.getBounds();
     }
 }

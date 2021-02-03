@@ -1,3 +1,5 @@
+package graphics.game;
+
 public enum ID {
-	Player(), BasicEnemy, FastEnemy,Trail;
+    Player(), BasicEnemy, FastEnemy, Trail;
 }

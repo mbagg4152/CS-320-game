@@ -1,4 +1,4 @@
-import javax.imageio.ImageIO;
+package graphics.game;import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -6,10 +6,10 @@ import java.io.File;
 
 public class Player extends GameObject {
 
-    private Handler handler;
+    private GameHandler handler;
     BufferedImage playerIcon = null;
 
-    public Player(int x, int y, ID id, Handler handler) {
+    public Player(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
         this.handler = handler;
         getPlayerIcon();

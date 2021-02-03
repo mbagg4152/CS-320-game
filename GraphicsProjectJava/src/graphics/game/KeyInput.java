@@ -1,16 +1,16 @@
-import java.awt.event.KeyAdapter;
+package graphics.game;import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
 
-    private Handler handler;
+    private GameHandler handler;
     private boolean up = false;
     private boolean dp = false;
     private boolean lp = false;
     private boolean rp = false;
     private int playerSpeed = 10;
 
-    public KeyInput(Handler handler) {
+    public KeyInput(GameHandler handler) {
         this.handler = handler;
     }
 

@@ -1,3 +1,5 @@
+package graphics.game;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -18,7 +20,7 @@ private static JLabel gameTitle;
 private static JPanel gamePanel;
 private Thread thread;
 private Random randObj;
-private Handler gHandler;
+private GameHandler gHandler;
 private HUD hud;
 private Spawn spawner;
 private boolean running = false;
@@ -78,7 +80,7 @@ private static void startGameMenu() {
 }
 
 public Game() {
-    gHandler = new Handler();
+    gHandler = new GameHandler();
     hud = new HUD();
     spawner = new Spawn(gHandler, hud);
     this.addKeyListener(new KeyInput(gHandler));

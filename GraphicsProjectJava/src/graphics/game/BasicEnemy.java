@@ -1,4 +1,4 @@
-import javax.imageio.ImageIO;
+package graphics.game;import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -6,10 +6,10 @@ import java.io.File;
 
 public class BasicEnemy extends GameObject {
 
-    private Handler handler;
+    private GameHandler handler;
     BufferedImage enemyIcon = null;
 
-    public BasicEnemy(int x, int y, ID id, Handler handler) {
+    public BasicEnemy(int x, int y, ID id, GameHandler handler) {
         super(x, y, id);
         velX = 5;
         velY = 5;

@@ -1,4 +1,4 @@
-import java.awt.AlphaComposite;
+package graphics.game;import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,11 +9,11 @@ public class Trail extends GameObject{
 	private float alpha = 1;
 	private int width;
 	private int height;
-	private Handler handler;
+	private GameHandler handler;
 	private Color color;
 	private float life;
 	
-	public Trail(int x, int y, ID id, Color color, int width, int height, float life, Handler handler) {
+	public Trail(int x, int y, ID id, Color color, int width, int height, float life, GameHandler handler) {
 		super(x, y, id);
 		this.color = color;
 		this.handler = handler;

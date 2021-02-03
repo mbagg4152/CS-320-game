@@ -1,5 +1,3 @@
-package graphics.game;
-
 import java.util.Random;
 
 public class Spawn {

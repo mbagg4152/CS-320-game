@@ -1,12 +1,13 @@
-package graphics.game;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
 
 public class FastEnemy extends GameObject{
 
 	private Handler handler;
+	BufferedImage enemyIcon = null;
 
 	public FastEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
@@ -26,11 +27,32 @@ public class FastEnemy extends GameObject{
 		handler.addObject(new Trail(x, y, ID.Trail, Color.blue, 10, 10, 0.01f, handler));
 	}
 
-	@Override
-	public void render(Graphics g) {
-		g.setColor(Color.blue);
-		g.fillRect(x, y, 16, 16);
+	private void getFastEnemyIcon() {
+		try {
+			enemyIcon = ImageIO.read(new File(System.getProperty("user.dir") + "/res/fastEnemy.png"));
+		} catch (Exception e) {
+			System.out.println("error loading fast enemy image file: " + e.toString());
+		}
 	}
+
+	public void render(Graphics g) {
+
+		//g.fillRect(x, y, 32, 32);
+		getFastEnemyIcon();
+		g.drawImage(enemyIcon, x, y, 16, 16, new ImageObserver() {
+			@Override
+			public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
+				return false;
+			}
+		});
+
+	}
+
+//	@Override
+//	public void render(Graphics g) {
+//		g.setColor(Color.blue);
+//		g.fillRect(x, y, 16, 16);
+//	}
 
 	@Override
 	public Rectangle getBounds() {

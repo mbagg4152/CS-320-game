@@ -61,13 +61,13 @@ public class Player extends GameObject {
     }
     
     public void collision() {
-        for (int i = 0; i < handler.object.size(); i++) {
-            GameObject tempObject = handler.object.get(i);
+        for (int i = 0; i < handler.gameObjects.size(); i++) {
+            GameObject tempObject = handler.gameObjects.get(i);
             
             if (tempObject.getId() == ID.BasicEnemy) {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    HUD.HEALTH -= 2;
-                    if (HUD.HEALTH <= 0) {
+                    HUD.playerHealth -= 2;
+                    if (HUD.playerHealth <= 0) {
                         Game.setPlayerDead(true);
                     }
                 }

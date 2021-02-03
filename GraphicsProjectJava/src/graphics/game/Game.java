@@ -26,6 +26,7 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
     public static Color bgMain, fgBtn, bgBtn, fgTitle;
     private static boolean playerDead = false;
+    private static Window mainWindow;
     
     public static void main(String[] args) {
         assignObjectValues();
@@ -85,7 +86,7 @@ public class Game extends Canvas implements Runnable {
         hud = new HUD();
         spawner = new Spawn(gHandler, hud);
         this.addKeyListener(new KeyInput(gHandler));
-        new Window(WIDTH, HEIGHT, "Run! Dodge! Run!", this);
+        mainWindow = new Window(WIDTH, HEIGHT, "Run! Dodge! Run!", this);
         randObj = new Random();
         
         gHandler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, gHandler));
@@ -117,8 +118,13 @@ public class Game extends Canvas implements Runnable {
         long timer = System.currentTimeMillis();
         while (running) {
             if (getPlayerDead()) {
-                stop();
-                new Game();
+                gHandler.removeAll();
+                mainWindow = null;
+                hud = null;
+                spawner = null;
+                randObj = null;
+                Window.deleteWindow();
+                startGameMenu();
             }
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -132,6 +138,8 @@ public class Game extends Canvas implements Runnable {
             if (System.currentTimeMillis() - timer > 1000) timer += 1000;
             
         }
+        
+        
         stop();
     }
     

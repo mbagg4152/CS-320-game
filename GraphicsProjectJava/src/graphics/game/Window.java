@@ -9,9 +9,10 @@ import javax.swing.JFrame;
 public class Window extends Canvas {
     
     @Serial private static final long serialVersionUID = -1788956338001533907L;
+    static JFrame frame;
     
     public Window(int width, int height, String title, Game game) {
-        JFrame frame = new JFrame(title);
+        frame = new JFrame(title);
         frame.setPreferredSize(new Dimension(width, height));
         frame.setMaximumSize(new Dimension(width, height));
         frame.setMinimumSize(new Dimension(width, height));
@@ -23,5 +24,9 @@ public class Window extends Canvas {
         frame.setVisible(true);
         game.start();
         
+    }
+    
+    public static void deleteWindow() {
+        frame.dispose();
     }
 }

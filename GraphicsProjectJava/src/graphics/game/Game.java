@@ -13,7 +13,7 @@ import java.util.Random;
 public class Game extends Canvas implements Runnable {
     
     @Serial private static final long serialVersionUID = 1442501350474703598L;
-    public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
+    public static final int WIDTH = 1000, HEIGHT = WIDTH / 12 * 9;
     private static JFrame gameFrame;
     private static JButton startBtn;
     private static JLabel gameTitle;
@@ -84,7 +84,7 @@ public class Game extends Canvas implements Runnable {
         hud = new HUD();
         spawner = new Spawn(gHandler, hud);
         this.addKeyListener(new KeyInput(gHandler));
-        new Window(WIDTH, HEIGHT, "MY FIRST GAME", this);
+        new Window(WIDTH, HEIGHT, "Run! Dodge! Run!", this);
         randObj = new Random();
         
         gHandler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, gHandler));

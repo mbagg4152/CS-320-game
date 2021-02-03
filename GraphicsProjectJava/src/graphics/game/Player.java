@@ -1,5 +1,3 @@
-package graphics.game;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,7 +20,7 @@ public class Player extends GameObject {
         try {
             playerIcon = ImageIO.read(new File(System.getProperty("user.dir") + "/res/player.png"));
         } catch (Exception e) {
-            System.out.println("error loading image file: " + e.toString());
+            System.out.println("error loading player image file: " + e.toString());
         }
     }
 

@@ -1,7 +1,10 @@
 package graphics.game;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
 import java.util.Random;
 
 public class Enemy extends GameItems {
@@ -9,13 +12,19 @@ public class Enemy extends GameItems {
     BufferedImage enemyIcon = null;
     private boolean noIcon = false;
     private int size;
+    private Color enemyColor;
+    private String iconPath;
     
-    public Enemy(int x, int y, ID id, int size) {
+    public Enemy(int x, int y, ID id, int size, GameHandler handler, int vx, int vy, String iconPath, Color color) {
         super(x, y, id);
-        velX = 5;
-        velY = 5;
+        velX = vx;
+        velY = vy;
         this.size = size;
         this.handler = handler;
+        this.enemyColor = color;
+        this.iconPath = iconPath;
+//        getIcon();
+        
         int randDiff = new Random().nextInt((int) Game.HEIGHT / 2);
         if (getBounds().intersects(Game.getPlayerBounds())) {
             setX(-x + randDiff);
@@ -24,7 +33,7 @@ public class Enemy extends GameItems {
     }
     
     @Override public Rectangle getBounds() {
-        return null;
+        return new Rectangle(x, y, this.size, this.size);
     }
     
     @Override public void tick() {
@@ -46,13 +55,24 @@ public class Enemy extends GameItems {
     }
     
     @Override public void render(Graphics g) {
-    
+        if (noIcon) {
+            setNoIcon(g);
+        } else {
+            getIcon();
+            g.drawImage(this.enemyIcon, x, y, this.size, this.size, new ImageObserver() {
+                @Override
+                public boolean imageUpdate(Image img, int imgFlags, int x, int y, int width, int height) {
+                    return false;
+                }
+            });
+            
+        }
     }
     
-    public void setNoIcon(Graphics g, Color color, int size) {
-        g.setColor(color);
-        g.fillRect(x, y, size, size);
-        g.drawRect(x, y, size, size);
+    public void setNoIcon(Graphics g) {
+        g.setColor(this.enemyColor);
+        g.fillRect(x, y, this.size, this.size);
+        g.drawRect(x, y, this.size, this.size);
     }
     
     public void setX(int x) {
@@ -61,5 +81,16 @@ public class Enemy extends GameItems {
     
     public void setY(int y) {
         this.y = y;
+    }
+    
+    public void getIcon() {
+        try {
+            this.enemyIcon = ImageIO.read(new File(this.iconPath));
+            
+        } catch (Exception e) {
+            System.out.println("error loading enemy image file: " + e.toString());
+            noIcon = true;
+            
+        }
     }
 }

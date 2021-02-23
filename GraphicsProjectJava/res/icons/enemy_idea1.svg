@@ -13,7 +13,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (1.0.2+r75+1)"
-   sodipodi:docname="enemyIdea1.svg"
+   sodipodi:docname="enemy_idea1.svg"
    inkscape:export-filename="/home/mag/Desktop/cs-320-game/GraphicsProjectJava/res/enemyIdea1.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
@@ -67,11 +67,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8"
-     inkscape:cx="26.142232"
-     inkscape:cy="27.740715"
+     inkscape:zoom="11.313708"
+     inkscape:cx="29.981408"
+     inkscape:cy="32.638618"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g1053"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
@@ -92,7 +92,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -104,7 +104,7 @@
        id="g1053"
        transform="translate(0,-0.264583)">
       <ellipse
-         style="fill:#0056dc;fill-opacity:1;stroke:#001433;stroke-width:0.953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+         style="fill:#dc002d;fill-opacity:1;stroke:#63000f;stroke-width:0.953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
          id="path853"
          cx="8.5767879"
          cy="9.5227299"
@@ -137,7 +137,7 @@
          cy="7.025106"
          r="0.50104696" />
       <path
-         style="fill:none;stroke:#002763;stroke-width:1.765;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;stroke:#3f0009;stroke-width:1.765;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          d="m 2.38125,1.3229167 c 0.8588576,-0.037917 1.727952,0.2130077 2.4344293,0.7028687 0.7064773,0.4898611 1.2462077,1.2157947 1.5118444,2.03342 0.080076,0.2464741 0.1363767,0.5001447 0.2155745,0.7469026 0.079198,0.2467579 0.1834274,0.4877963 0.3354731,0.6976625 0.1520457,0.2098663 0.3515121,0.3847469 0.5786269,0.5095691 0.2271149,0.1248223 0.4784702,0.1976503 0.7288149,0.2646522 l 0.2272393,0.060818 c 0.1253561,0.03355 0.2530754,0.06481 0.3828256,0.062655 C 8.9258283,6.3993109 9.055406,6.3632764 9.1651045,6.2939511 9.274803,6.2246258 9.3628818,6.1242061 9.4276868,6.011778 9.4924919,5.8993499 9.5351811,5.7757045 9.5735545,5.6517398 9.653533,5.3933706 9.7177693,5.1298904 9.8116762,4.8762515 9.9055831,4.6226127 10.031488,4.3762496 10.21833,4.1806961 10.494279,3.8918809 10.884421,3.7346799 11.277717,3.6648232 11.671014,3.5949666 12.073374,3.6046157 12.472819,3.6021557 13.793248,3.5940239 15.112805,3.450649 16.404167,3.175"
          id="path1034"
          inkscape:path-effect="#path-effect1036"

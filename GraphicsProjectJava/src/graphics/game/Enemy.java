@@ -15,7 +15,7 @@ public class Enemy extends GameItems {
     private Color enemyColor;
     private String iconPath;
     
-    public Enemy(int x, int y, ID id, int size, GameHandler handler, int vx, int vy, String iconPath, Color color) {
+    public Enemy(int x, int y, int size, int vx, int vy, ID id, GameHandler handler, String iconPath, Color color) {
         super(x, y, id);
         velX = vx;
         velY = vy;
@@ -23,17 +23,12 @@ public class Enemy extends GameItems {
         this.handler = handler;
         this.enemyColor = color;
         this.iconPath = iconPath;
-//        getIcon();
         
         int randDiff = new Random().nextInt((int) Game.HEIGHT / 2);
         if (getBounds().intersects(Game.getPlayerBounds())) {
             setX(-x + randDiff);
             setY(y - randDiff);
         }
-    }
-    
-    @Override public Rectangle getBounds() {
-        return new Rectangle(x, y, this.size, this.size);
     }
     
     @Override public void tick() {
@@ -55,9 +50,8 @@ public class Enemy extends GameItems {
     }
     
     @Override public void render(Graphics g) {
-        if (noIcon) {
-            setNoIcon(g);
-        } else {
+        if (noIcon) setNoIcon(g);
+        else {
             getIcon();
             g.drawImage(this.enemyIcon, x, y, this.size, this.size, new ImageObserver() {
                 @Override
@@ -69,28 +63,22 @@ public class Enemy extends GameItems {
         }
     }
     
+    public void getIcon() {
+        try { this.enemyIcon = ImageIO.read(new File(this.iconPath)); } catch (Exception e) {
+            System.out.println("error loading enemy image file: " + e.toString());
+            noIcon = true;
+        }
+    }
+    
     public void setNoIcon(Graphics g) {
         g.setColor(this.enemyColor);
         g.fillRect(x, y, this.size, this.size);
         g.drawRect(x, y, this.size, this.size);
     }
     
-    public void setX(int x) {
-        this.x = x;
-    }
+    public void setX(int x) { this.x = x; }
     
-    public void setY(int y) {
-        this.y = y;
-    }
+    public void setY(int y) { this.y = y; }
     
-    public void getIcon() {
-        try {
-            this.enemyIcon = ImageIO.read(new File(this.iconPath));
-            
-        } catch (Exception e) {
-            System.out.println("error loading enemy image file: " + e.toString());
-            noIcon = true;
-            
-        }
-    }
+    @Override public Rectangle getBounds() { return new Rectangle(x, y, this.size, this.size); }
 }

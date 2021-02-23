@@ -17,6 +17,7 @@ public class Enemy extends GameItems {
     private int size;
     private Color enemyColor;
     private String iconPath;
+    int counter = 0;
     
     public Enemy(int x, int y, int size, int vx, int vy, ItemID id, GameHandler handler, String iconPath, Color color) {
         super(x, y, id);
@@ -35,18 +36,23 @@ public class Enemy extends GameItems {
     }
     
     @Override public void tick() {
+        
         x += velX;
         y += velY;
-        if (y <= 0 || y >= Game.HEIGHT - 1) velY *= -1;
-        if (x <= 0 || x >= Game.WIDTH - 1) velX *= -1;
+        if (y <= 0 || y >= Game.HEIGHT - 1) {
+            velY *= -1;
+            this.size = 0;
+        }
+        if (x <= 0 || x >= Game.WIDTH - 1) {
+            velX *= -1;
+            this.size = 0;
+        }
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
             if (tempObject.getId() == ItemID.Player) {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    velY *= -1;
-                    velX *= -1;
-                    setY(y + 16);
-                    setX(x + 16);
+                    setY(y - 48);
+                    setX(x - 48);
                 }
             }
         }

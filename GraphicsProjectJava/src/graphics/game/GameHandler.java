@@ -13,10 +13,10 @@ public class GameHandler {
     public void tick() {
         // do not replace with enhanced for loop no matter how much intelli j bugs you about it!
         for (int i = 0; i < gameItems.size(); i++) {
-            if (Game.isPlayerDead()) {
-                break;
-            }
+            if (Game.isPlayerDead()) break;
             GameItems tempObject = gameItems.get(i);
+//            System.out.println(tempObject.getX() + " " + tempObject.getY());
+            
             tempObject.tick();
         }
         
@@ -25,13 +25,17 @@ public class GameHandler {
     public void render(Graphics g) {
         // do not replace with enhanced for loop no matter how much intelli j bugs you about it!
         for (int i = 0; i < gameItems.size(); i++) {
-            if (Game.isPlayerDead()) {
-                break;
-            }
+            if (Game.isPlayerDead()) break;
             GameItems tempObject = gameItems.get(i);
-            if (!(rendered.contains(g))) {
-                rendered.add(g);
-            }
+            if (!(rendered.contains(g))) rendered.add(g);
+//            if ((tempObject.getY() <= 0 || tempObject.getY() >= Game.HEIGHT - 1)) {
+//                removeObject(tempObject);
+//                System.out.println("removed");
+//            }
+//            if (tempObject.getX() <= 0 || tempObject.getX() >= Game.HEIGHT - 1){
+//                removeObject(tempObject);
+//                System.out.println("removed");
+//            }
             
             tempObject.render(g);
         }

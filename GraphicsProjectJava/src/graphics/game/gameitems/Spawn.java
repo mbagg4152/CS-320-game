@@ -24,21 +24,22 @@ public class Spawn {
     public void tick() {
         scoreKeep++;
 //        levelKeep++;
-        if (scoreKeep >= 100) {
+        if (scoreKeep >= 10) {
             scoreKeep = 0;
+            levelKeep++;
             hud.setLevel(hud.getLevel() + 1);
             
-            if (hud.getLevel() > 1) {
-                levelKeep++;
-                handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ItemID.BasicEnemy, handler));
+            if (levelKeep%2==0) {
+                
+                handler.addObject(new BasicEnemy(r.nextInt(WIDTH), 0, ItemID.BasicEnemy, handler));
             }
-            if (levelKeep == 5) {
-                levelKeep++;
-                handler.addObject(new BigEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ItemID.BasicEnemy, handler));
+            if (levelKeep%5==0) {
+               
+                handler.addObject(new BigEnemy(r.nextInt(WIDTH), 0, ItemID.BasicEnemy, handler));
             }
-            if (levelKeep == 10) {
-                levelKeep = 0;
-                handler.addObject(new MegaEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ItemID.MegaEnemy, handler));
+            if (levelKeep%13==0) {
+               
+                handler.addObject(new MegaEnemy(r.nextInt(WIDTH), 0, ItemID.MegaEnemy, handler));
             }
         }
         

@@ -20,7 +20,7 @@ public class Player extends GameItems {
     public GameHandler handler;
     Clip hitSound;
     AudioInputStream sound;
-
+    
     public Player(int x, int y, ItemID id, GameHandler handler) {
         super(x, y, id);
         this.handler = handler;
@@ -41,17 +41,17 @@ public class Player extends GameItems {
 //        }
 //
 //    }
-
+    
     private void getIcon() {
         try {
             playerIcon = ImageIO.read(new File(PATH_PLAYER_ICON));
         } catch (Exception e) {
-
+            
             System.out.println(MessageFormat.format("Could not find player icon", e.toString()));
             noIcon = true;
         }
     }
-
+    
     public void tick() {
         x += velX;
         y += velY;
@@ -59,7 +59,7 @@ public class Player extends GameItems {
         y = Game.clamp(y, 0, Game.HEIGHT - 60);
         collision();
     }
-
+    
     public void render(Graphics g) {
         if (noIcon) {
             g.setColor(COLOR_PLAYER);
@@ -74,30 +74,32 @@ public class Player extends GameItems {
                 }
             });
         }
-
+        
     }
-
+    
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x, y, SIZE_PLAYER, SIZE_PLAYER);
     }
-
+    
     public void collision() {
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
-
+            
             if (tempObject.getId() == ItemID.BasicEnemy || tempObject.getId() == ItemID.BigEnemy) {
-
+                
                 if (getBounds().intersects(tempObject.getBounds())) {
                     System.out.println("BONK " + HUD.playerHealth);
                     new HitSound();
-
+                    
                     if (tempObject.getId() == ItemID.BasicEnemy) {
                         HUD.playerHealth -= 1;
-                    } else {
+                    } else if (tempObject.getId() == ItemID.BigEnemy) {
                         HUD.playerHealth -= 4;
+                    } else if (tempObject.getId() == ItemID.MegaEnemy) {
+                        HUD.playerHealth -= 6;
                     }
-
+                    
                     if (HUD.playerHealth <= 0) {
                         Game.setPlayerDead(true);
                     }

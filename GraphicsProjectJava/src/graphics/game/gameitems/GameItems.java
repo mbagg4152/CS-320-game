@@ -8,6 +8,7 @@ public abstract class GameItems {
     protected int x, y;
     protected ItemID id;
     protected int velX, velY;
+    public int size = -1;
     
     public GameItems(int x, int y, ItemID id) {
         this.x = x;

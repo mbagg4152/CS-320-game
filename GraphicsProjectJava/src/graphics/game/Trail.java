@@ -1,5 +1,8 @@
 package graphics.game;
 
+import graphics.game.gameitems.GameItems;
+import graphics.game.gameitems.ItemID;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,7 +18,7 @@ public class Trail extends GameItems {
     private Color color;
     private float life;
     
-    public Trail(int x, int y, ID id, Color color, int width, int height, float life, GameHandler handler) {
+    public Trail(int x, int y, ItemID id, Color color, int width, int height, float life, GameHandler handler) {
         super(x, y, id);
         this.color = color;
         this.handler = handler;

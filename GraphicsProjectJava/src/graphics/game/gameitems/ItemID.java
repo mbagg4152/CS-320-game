@@ -1,5 +1,5 @@
-package graphics.game;
+package graphics.game.gameitems;
 
-public enum ID {
+public enum ItemID {
     Player(), Enemy, BasicEnemy, BigEnemy, MegaEnemy;
 }

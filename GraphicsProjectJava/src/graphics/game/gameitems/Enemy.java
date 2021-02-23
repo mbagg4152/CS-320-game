@@ -1,4 +1,7 @@
-package graphics.game;
+package graphics.game.gameitems;
+
+import graphics.game.Game;
+import graphics.game.GameHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,7 +18,7 @@ public class Enemy extends GameItems {
     private Color enemyColor;
     private String iconPath;
     
-    public Enemy(int x, int y, int size, int vx, int vy, ID id, GameHandler handler, String iconPath, Color color) {
+    public Enemy(int x, int y, int size, int vx, int vy, ItemID id, GameHandler handler, String iconPath, Color color) {
         super(x, y, id);
         velX = vx;
         velY = vy;
@@ -38,7 +41,7 @@ public class Enemy extends GameItems {
         if (x <= 0 || x >= Game.WIDTH - 1) velX *= -1;
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
-            if (tempObject.getId() == ID.Player) {
+            if (tempObject.getId() == ItemID.Player) {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     velY *= -1;
                     velX *= -1;

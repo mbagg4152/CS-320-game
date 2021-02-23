@@ -8,14 +8,14 @@ import java.util.Arrays;
 import static graphics.game.Const.OOF_ROBLOX;
 
 public class HitSound implements Runnable {
-    Clip hitSound;
-    AudioInputStream sound;
-    boolean stop = false;
-
-    HitSound() {
+    public Clip hitSound;
+    public AudioInputStream sound;
+    public boolean stop = false;
+    
+    public HitSound() {
         this.stop = stop;
     }
-
+    
     @Override
     public void run() {
         try {

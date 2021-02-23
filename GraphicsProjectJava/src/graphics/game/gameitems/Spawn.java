@@ -1,4 +1,7 @@
-package graphics.game;
+package graphics.game.gameitems;
+
+import graphics.game.GameHandler;
+import graphics.game.HUD;
 
 import java.util.Random;
 
@@ -27,15 +30,15 @@ public class Spawn {
             
             if (hud.getLevel() > 1) {
                 levelKeep++;
-                handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
+                handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ItemID.BasicEnemy, handler));
             }
             if (levelKeep == 5) {
                 levelKeep++;
-                handler.addObject(new BigEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
+                handler.addObject(new BigEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ItemID.BasicEnemy, handler));
             }
             if (levelKeep == 10) {
                 levelKeep = 0;
-                handler.addObject(new MegaEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.MegaEnemy, handler));
+                handler.addObject(new MegaEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ItemID.MegaEnemy, handler));
             }
         }
         

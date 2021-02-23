@@ -1,4 +1,4 @@
-package graphics.game;
+package graphics.game.gameitems;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -6,10 +6,10 @@ import java.awt.Rectangle;
 public abstract class GameItems {
     
     protected int x, y;
-    protected ID id;
+    protected ItemID id;
     protected int velX, velY;
     
-    public GameItems(int x, int y, ID id) {
+    public GameItems(int x, int y, ItemID id) {
         this.x = x;
         this.y = y;
         this.id = id;
@@ -26,7 +26,7 @@ public abstract class GameItems {
         this.y = y;
     }
     
-    public void setId(ID id) {
+    public void setId(ItemID id) {
         this.id = id;
     }
     
@@ -47,7 +47,7 @@ public abstract class GameItems {
         return y;
     }
     
-    public ID getId() {
+    public ItemID getId() {
         return id;
     }
     

@@ -1,4 +1,6 @@
-package graphics.game;
+package graphics.game.gameitems;
+
+import graphics.game.*;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
@@ -7,10 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
-import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Objects;
 
 import static graphics.game.Const.*;
 
@@ -18,11 +17,11 @@ public class Player extends GameItems {
     BufferedImage playerIcon = null;
     Color playerColor = new Color(103, 0, 38);
     boolean noIcon = false;
-    private GameHandler handler;
+    public GameHandler handler;
     Clip hitSound;
     AudioInputStream sound;
 
-    public Player(int x, int y, ID id, GameHandler handler) {
+    public Player(int x, int y, ItemID id, GameHandler handler) {
         super(x, y, id);
         this.handler = handler;
         getIcon();
@@ -87,13 +86,13 @@ public class Player extends GameItems {
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
 
-            if (tempObject.getId() == ID.BasicEnemy || tempObject.getId() == ID.BigEnemy) {
+            if (tempObject.getId() == ItemID.BasicEnemy || tempObject.getId() == ItemID.BigEnemy) {
 
                 if (getBounds().intersects(tempObject.getBounds())) {
                     System.out.println("BONK " + HUD.playerHealth);
                     new HitSound();
 
-                    if (tempObject.getId() == ID.BasicEnemy) {
+                    if (tempObject.getId() == ItemID.BasicEnemy) {
                         HUD.playerHealth -= 1;
                     } else {
                         HUD.playerHealth -= 4;

@@ -1,5 +1,8 @@
 package graphics.game;
 
+import graphics.game.gameitems.GameItems;
+import graphics.game.gameitems.ItemID;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -22,7 +25,7 @@ public class KeyInput extends KeyAdapter {
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
             
-            if (tempObject.getId() == ID.Player) {
+            if (tempObject.getId() == ItemID.Player) {
                 if (key == KeyEvent.VK_UP) {
                     upEvent = true;
                     tempObject.setVelY(-playerSpeed);
@@ -52,7 +55,7 @@ public class KeyInput extends KeyAdapter {
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
             
-            if (tempObject.getId() == ID.Player) {
+            if (tempObject.getId() == ItemID.Player) {
                 if (key == KeyEvent.VK_UP) {
                     upEvent = false;
                     if (downEvent) tempObject.setVelY(playerSpeed);

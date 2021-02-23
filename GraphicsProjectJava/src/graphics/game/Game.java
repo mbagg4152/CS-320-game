@@ -1,5 +1,10 @@
 package graphics.game;
 
+import graphics.game.gameitems.BasicEnemy;
+import graphics.game.gameitems.ItemID;
+import graphics.game.gameitems.Player;
+import graphics.game.gameitems.Spawn;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -8,13 +13,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serial;
-import java.util.Arrays;
 import java.util.Random;
-
-import static graphics.game.Const.OOF_ROBLOX;
 
 public class Game extends Canvas implements Runnable {
 
@@ -99,9 +99,9 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(gHandler));
         mainGameFrame = new GameFrame(WIDTH, HEIGHT, "Run! Dodge! Run!", this);
         randObj = new Random();
-        character = new Player((WIDTH / 2) - 32, (HEIGHT / 2) - 32, ID.Player, gHandler);
+        character = new Player((WIDTH / 2) - 32, (HEIGHT / 2) - 32, ItemID.Player, gHandler);
         gHandler.addObject(character);
-        gHandler.addObject(new BasicEnemy(randObj.nextInt(WIDTH), randObj.nextInt(HEIGHT), ID.BasicEnemy, gHandler));
+        gHandler.addObject(new BasicEnemy(randObj.nextInt(WIDTH), randObj.nextInt(HEIGHT), ItemID.BasicEnemy, gHandler));
 
         this.requestFocusInWindow();
     }

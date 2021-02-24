@@ -14,6 +14,8 @@ public abstract class GameItems {
         this.x = x;
         this.y = y;
         this.id = id;
+        this.velX = 0;
+        this.velY = 0;
     }
     
     public abstract Rectangle getBounds();

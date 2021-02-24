@@ -15,15 +15,7 @@ public class GameHandler {
         // do not replace with enhanced for loop no matter how much intelli j bugs you about it!
         for (int i = 0; i < gameItems.size(); i++) {
             if (Game.isPlayerDead()) break;
-            GameItems tempObject = gameItems.get(i);
-            tempObject.tick();
-            if (tempObject instanceof Enemy) {
-                Enemy tmpEnemy = (Enemy) tempObject;
-                if (tmpEnemy.isMarkedForDeath()) {
-                    removeObject(tempObject);
-//                    rendered.remove(g);
-                }
-            }
+            gameItems.get(i).tick();
             
         }
         
@@ -33,17 +25,16 @@ public class GameHandler {
         // do not replace with enhanced for loop no matter how much intelli j bugs you about it!
         for (int i = 0; i < gameItems.size(); i++) {
             if (Game.isPlayerDead()) break;
-            GameItems tempObject = gameItems.get(i);
+            GameItems tmpGI = gameItems.get(i);
             if (!(rendered.contains(g))) rendered.add(g);
-            if (tempObject instanceof Enemy) {
-                Enemy tmpEnemy = (Enemy) tempObject;
-                if (tmpEnemy.isMarkedForDeath()) {
-                    removeObject(tempObject);
+            if (tmpGI instanceof Enemy) {
+                if (((Enemy) tmpGI).isMarkedForDeath()) {
+                    removeObject(tmpGI);
                     rendered.remove(g);
                 }
             }
             
-            tempObject.render(g);
+            tmpGI.render(g);
         }
     }
     
@@ -57,9 +48,7 @@ public class GameHandler {
     
     public void removeAll() {
         gameItems = new LinkedList<>();
-        for (Graphics item : rendered) {
-            item.dispose();
-        }
+        for (Graphics item : rendered) item.dispose();
         rendered = new LinkedList<>();
     }
     

@@ -21,11 +21,11 @@ public class Enemy extends GameItems {
     int passedInSize;
     boolean markedForDeath = false;
     int damage;
+    int vx, vy;
     
     public Enemy(int x, int y, int size, int vx, int vy, int damage, ItemID id, GameHandler handler, String iconPath, Color color) {
         super(x, y, id);
-        velX = vx;
-        velY = vy;
+        
         this.size = size;
         this.passedInSize = size;
         this.handler = handler;
@@ -38,22 +38,26 @@ public class Enemy extends GameItems {
             setX(-x + randDiff);
             setY(y - randDiff);
         }
+        this.setVelX(vx);
+        this.setVelY(vy);
+        if (x > (Game.WIDTH / 2) + 1 && x < Game.WIDTH) this.setVelX(-1 * vx);
+        if (y > (Game.HEIGHT / 2) + 1 && y < Game.HEIGHT) this.setVelY(-1 * vy);
     }
     
     @Override public void tick() {
         
-        x += velX;
-        y += velY;
-        if ((y <= 0 || y >= Game.HEIGHT - 1) || (x <= 0 || x >= Game.WIDTH - 1)) {
-            this.markedForDeath = true;
-        }
+        x += this.velX;
+        y += this.velY;
+        if ((y <= 0 || y >= Game.HEIGHT - 1)) this.markedForDeath = true;
+        if (x <= 0 || x >= Game.WIDTH - 1) this.markedForDeath = true;
         
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
-            if (tempObject.getId() == ItemID.Player) {
+            if (tempObject instanceof Player) {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    setY(y - 48);
-                    setX(x - 48);
+                    this.setVelY(-5 * this.getVelY());
+                    this.setVelX(-5 * this.getVelX());
+                    
                 }
             }
         }
@@ -85,10 +89,6 @@ public class Enemy extends GameItems {
         g.fillRect(x, y, this.size, this.size);
         g.drawRect(x, y, this.size, this.size);
     }
-    
-    public void setX(int x) { this.x = x; }
-    
-    public void setY(int y) { this.y = y; }
     
     public int getSize() {return this.size;}
     

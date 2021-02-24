@@ -21,25 +21,45 @@ public class Spawn {
         this.hud = hud;
     }
     
+    public int[] getSpawn() {
+        int spawnX = r.nextInt(WIDTH), spawnY = r.nextInt(HEIGHT), flip = r.nextInt(2), flip2 = r.nextInt(2);
+        if (spawnX > spawnY) {
+            if (flip == 0) spawnY = 1;
+            else spawnY = HEIGHT - 1;
+        } else if (spawnY > spawnX) {
+            if (flip == 0) spawnX = 1;
+            else spawnX = WIDTH - 1;
+        } else {
+            if (flip == 0) {
+                if (flip2 == 0) spawnX = 1;
+                else spawnX = WIDTH - 1;
+            } else {
+                if (flip2 == 0) spawnY = 1;
+                else spawnY = HEIGHT - 1;
+            }
+        }
+        return new int[]{spawnX, spawnY};
+    }
+    
     public void tick() {
         scoreKeep++;
-//        levelKeep++;
+        int spawnVal = r.nextInt(15);
         if (scoreKeep >= 10) {
             scoreKeep = 0;
             levelKeep++;
             hud.setLevel(hud.getLevel() + 1);
-            
-            if (levelKeep%2==0) {
-                
-                handler.addObject(new BasicEnemy(r.nextInt(WIDTH), 0, ItemID.BasicEnemy, handler));
+            int[] points; // make different calls to getSpawn() to hopefully have different random vals
+            if (levelKeep % 2 == 0) {
+                points = getSpawn();
+                handler.addObject(new BasicEnemy(points[0], points[1], ItemID.BasicEnemy, handler));
             }
-            if (levelKeep%5==0) {
-               
-                handler.addObject(new BigEnemy(r.nextInt(WIDTH), 0, ItemID.BasicEnemy, handler));
+            if (levelKeep % 5 == 0) {
+                points = getSpawn();
+                handler.addObject(new BigEnemy(points[0], points[1], ItemID.BasicEnemy, handler));
             }
-            if (levelKeep%13==0) {
-               
-                handler.addObject(new MegaEnemy(r.nextInt(WIDTH), 0, ItemID.MegaEnemy, handler));
+            if (levelKeep % 17 == 0) {
+                points = getSpawn();
+                handler.addObject(new MegaEnemy(points[0], points[1], ItemID.MegaEnemy, handler));
             }
         }
         

@@ -18,15 +18,20 @@ public class Enemy extends GameItems {
     private Color enemyColor;
     private String iconPath;
     int counter = 0;
+    int passedInSize;
+    boolean markedForDeath = false;
+    int damage;
     
-    public Enemy(int x, int y, int size, int vx, int vy, ItemID id, GameHandler handler, String iconPath, Color color) {
+    public Enemy(int x, int y, int size, int vx, int vy, int damage, ItemID id, GameHandler handler, String iconPath, Color color) {
         super(x, y, id);
         velX = vx;
         velY = vy;
         this.size = size;
+        this.passedInSize = size;
         this.handler = handler;
         this.enemyColor = color;
         this.iconPath = iconPath;
+        this.damage = damage;
         
         int randDiff = new Random().nextInt((int) Game.HEIGHT / 2);
         if (getBounds().intersects(Game.getPlayerBounds())) {
@@ -39,14 +44,10 @@ public class Enemy extends GameItems {
         
         x += velX;
         y += velY;
-        if (y <= 0 || y >= Game.HEIGHT - 1) {
-            velY *= -1;
-            this.size = 0;
+        if ((y <= 0 || y >= Game.HEIGHT - 1) || (x <= 0 || x >= Game.WIDTH - 1)) {
+            this.markedForDeath = true;
         }
-        if (x <= 0 || x >= Game.WIDTH - 1) {
-            velX *= -1;
-            this.size = 0;
-        }
+        
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
             if (tempObject.getId() == ItemID.Player) {
@@ -88,6 +89,12 @@ public class Enemy extends GameItems {
     public void setX(int x) { this.x = x; }
     
     public void setY(int y) { this.y = y; }
+    
+    public int getSize() {return this.size;}
+    
+    public int getDamage() {return this.damage;}
+    
+    public boolean isMarkedForDeath() {return this.markedForDeath;}
     
     @Override public Rectangle getBounds() { return new Rectangle(x, y, this.size, this.size); }
 }

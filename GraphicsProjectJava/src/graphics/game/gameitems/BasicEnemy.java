@@ -8,7 +8,7 @@ public class BasicEnemy extends Enemy {
     private GameHandler handler;
     
     public BasicEnemy(int x, int y, ItemID id, GameHandler handler) {
-        super(x, y, SIZE_BASIC, 0, 5, id, handler, PATH_BASIC_ICON, COLOR_BASIC);
+        super(x, y, SIZE_BASIC, 0, 5, 1,id, handler, PATH_BASIC_ICON, COLOR_BASIC);
         this.handler = handler;
     }
 }

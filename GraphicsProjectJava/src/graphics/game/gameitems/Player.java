@@ -86,20 +86,11 @@ public class Player extends GameItems {
         for (int i = 0; i < handler.gameItems.size(); i++) {
             GameItems tempObject = handler.gameItems.get(i);
             
-            if (tempObject.getId() == ItemID.BasicEnemy || tempObject.getId() == ItemID.BigEnemy) {
+            if (tempObject instanceof Enemy) {
                 
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    System.out.println("BONK " + HUD.playerHealth);
-                    new HitSound();
-                    
-                    if (tempObject.getId() == ItemID.BasicEnemy) {
-                        HUD.playerHealth -= 1;
-                    } else if (tempObject.getId() == ItemID.BigEnemy) {
-                        HUD.playerHealth -= 4;
-                    } else if (tempObject.getId() == ItemID.MegaEnemy) {
-                        HUD.playerHealth -= 6;
-                    }
-                    
+                    HUD.playerHealth -= ((Enemy) tempObject).getDamage();
+                    System.out.println("BONK -" + ((Enemy) tempObject).getDamage() + " " + HUD.playerHealth);
                     if (HUD.playerHealth <= 0) {
                         Game.setPlayerDead(true);
                     }

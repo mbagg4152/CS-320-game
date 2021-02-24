@@ -1,5 +1,6 @@
 package graphics.game;
 
+import graphics.game.gameitems.Enemy;
 import graphics.game.gameitems.GameItems;
 
 import java.awt.Graphics;
@@ -15,9 +16,15 @@ public class GameHandler {
         for (int i = 0; i < gameItems.size(); i++) {
             if (Game.isPlayerDead()) break;
             GameItems tempObject = gameItems.get(i);
-//            System.out.println(tempObject.getX() + " " + tempObject.getY());
-            
             tempObject.tick();
+            if (tempObject instanceof Enemy) {
+                Enemy tmpEnemy = (Enemy) tempObject;
+                if (tmpEnemy.isMarkedForDeath()) {
+                    removeObject(tempObject);
+//                    rendered.remove(g);
+                }
+            }
+            
         }
         
     }
@@ -28,14 +35,13 @@ public class GameHandler {
             if (Game.isPlayerDead()) break;
             GameItems tempObject = gameItems.get(i);
             if (!(rendered.contains(g))) rendered.add(g);
-//            if ((tempObject.getY() <= 0 || tempObject.getY() >= Game.HEIGHT - 1)) {
-//                removeObject(tempObject);
-//                System.out.println("removed");
-//            }
-//            if (tempObject.getX() <= 0 || tempObject.getX() >= Game.HEIGHT - 1){
-//                removeObject(tempObject);
-//                System.out.println("removed");
-//            }
+            if (tempObject instanceof Enemy) {
+                Enemy tmpEnemy = (Enemy) tempObject;
+                if (tmpEnemy.isMarkedForDeath()) {
+                    removeObject(tempObject);
+                    rendered.remove(g);
+                }
+            }
             
             tempObject.render(g);
         }

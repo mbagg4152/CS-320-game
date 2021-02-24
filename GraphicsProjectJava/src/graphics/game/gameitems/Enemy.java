@@ -55,8 +55,8 @@ public class Enemy extends GameItems {
             GameItems tempObject = handler.gameItems.get(i);
             if (tempObject instanceof Player) {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    this.setVelY(-5 * this.getVelY());
-                    this.setVelX(-5 * this.getVelX());
+                    this.setVelY(-10 * this.getVelY());
+                    this.setVelX(-10 * this.getVelX());
                     
                 }
             }

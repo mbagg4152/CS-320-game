@@ -10,6 +10,8 @@ public class Const {
     public static final String PATH_PLAYER_ICON = USER_DIR + "/res/icons/player-blue.png";
     public static final String PATH_BASIC_ICON = USER_DIR + "/res/icons/enemy-purple.png";
     public static final String PATH_MEGA_ICON = USER_DIR + "/res/icons/enemy-slime.png";
+    public static final String PATH_TITLE = USER_DIR + "/res/icons/title.png";
+    public static final String PATH_START = USER_DIR + "/res/icons/start-btn.png";
     
     // colors
     public static final Color COLOR_BIG = new Color(176, 6, 42);

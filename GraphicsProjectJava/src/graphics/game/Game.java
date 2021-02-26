@@ -5,37 +5,42 @@ import graphics.game.gameitems.ItemID;
 import graphics.game.gameitems.Player;
 import graphics.game.gameitems.Spawn;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serial;
 import java.util.Random;
 
+import static graphics.game.Const.*;
+
 public class Game extends Canvas implements Runnable {
     
-    @Serial
-    private static final long serialVersionUID = 1442501350474703598L;
-    public static final int WIDTH = 1600, HEIGHT = 900;
-    private static JFrame gameFrame;
-    private static JButton startBtn;
-    private static JLabel gameTitle;
-    private static JPanel gamePanel;
-    private Thread thread;
-    private Random randObj;
+    @Serial private static final long serialVersionUID = 1442501350474703598L;
     private GameHandler gHandler;
     private HUD hud;
+    private Random randObj;
     private Spawn spawner;
-    private boolean running = false;
-    public static Color bgMain, fgBtn, bgBtn, fgTitle;
-    private static boolean playerDead = false;
+    private Thread thread;
+    private static JButton startBtn;
+    private static JFrame gameFrame;
+    private static JLabel gameTitle;
+    private static JPanel gamePanel;
+    private static boolean running = false, playerDead = false;
+    public static Color bgMain;
+    public static final int WIDTH = 1600, HEIGHT = 900;
+    
     private static GameFrame mainGameFrame;
     private static Player character;
     public static Clip hitSound;
+    public static BufferedImage titleIcon, btnIcon;
     
     public static void main(String[] args) {
         assignObjectValues();
@@ -44,19 +49,25 @@ public class Game extends Canvas implements Runnable {
     
     private static void assignObjectValues() {
         bgMain = new Color(28, 28, 28);
-        fgBtn = new Color(0, 50, 104);
-        bgBtn = new Color(134, 134, 134);
-        fgTitle = new Color(13, 145, 252);
-        gameFrame = new JFrame("Run! Dodge! Run! - Main Menu");
+        gameFrame = new JFrame("Start Menu");
         gamePanel = new JPanel(new GridLayout(0, 1, 10, 10));
-        gameTitle = new JLabel("Run! Dodge! Run!", JLabel.CENTER);
-        startBtn = new JButton("Click here to start the game!");
+        gameTitle = new JLabel("", JLabel.CENTER);
+        startBtn = new JButton();
+        try {
+            titleIcon = ImageIO.read(new File(PATH_TITLE));
+            btnIcon = ImageIO.read(new File(PATH_START));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
     
     private static void startGameMenu() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); // get screen size
         // set up the main menu frame
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setSize(500, 500);
+        gameFrame.setLocation(dim.width / 2 - 500 / 2, dim.height / 2 - 500 / 2); // center panel
         gameFrame.setLayout(new GridLayout(0, 1));
         gameFrame.getContentPane().setBackground(bgMain);
         
@@ -65,16 +76,13 @@ public class Game extends Canvas implements Runnable {
         gamePanel.setBackground(bgMain);
         
         // main menu title
-        gameTitle.setForeground(fgTitle);
-        gameTitle.setFont(new Font("", Font.PLAIN, 40));
+        gameTitle.setIcon(new ImageIcon(titleIcon));
         
         // create and change settings for the button
-        startBtn.setForeground(fgBtn);
-        startBtn.setBackground(bgBtn);
-        startBtn.setBorder(new LineBorder(bgMain, 60));
-        startBtn.setFocusPainted(false);
-        startBtn.setBounds(100, 100, 100, 100);
-        startBtn.setFont(new Font("", Font.PLAIN, 18));
+        startBtn.setBorderPainted(false);
+        startBtn.setContentAreaFilled(false);
+        startBtn.setIcon(new ImageIcon(btnIcon));
+        startBtn.setFocusable(false);
         
         // add UI elements to panel and then to JFrame
         gamePanel.add(gameTitle);
@@ -142,8 +150,7 @@ public class Game extends Canvas implements Runnable {
                 resetGameVals();
                 assignObjectValues();
                 startGameMenu();
-                setPlayerDead(false);
-//                running = false;
+                killPlayer(false);
             }
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -152,15 +159,10 @@ public class Game extends Canvas implements Runnable {
                 tick();
                 delta--;
             }
-            
             if (running) render();
             if (System.currentTimeMillis() - timer > 1000) timer += 1000;
-            
         }
-        
-        
         stop();
-        
     }
     
     private void tick() {
@@ -174,16 +176,13 @@ public class Game extends Canvas implements Runnable {
         if (bs == null) {
             this.createBufferStrategy(3);
             return;
-            
         }
         
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        
         gHandler.render(g);
         hud.render(g);
-        
         g.dispose();
         bs.show();
         
@@ -199,12 +198,10 @@ public class Game extends Canvas implements Runnable {
         return playerDead;
     }
     
-    public static void setPlayerDead(boolean state) {
+    public static void killPlayer(boolean state) {
         playerDead = state;
     }
     
-    public static Rectangle getPlayerBounds() {
-        return character.getBounds();
-    }
+    public static Rectangle getPlayerBounds() { return character.getBounds(); }
     
 }

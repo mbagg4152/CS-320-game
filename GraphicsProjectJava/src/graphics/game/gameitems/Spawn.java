@@ -43,21 +43,20 @@ public class Spawn {
     
     public void tick() {
         scoreKeep++;
-        int spawnVal = r.nextInt(15);
         if (scoreKeep >= 10) {
             scoreKeep = 0;
             levelKeep++;
             hud.setLevel(hud.getLevel() + 1);
             int[] points; // make different calls to getSpawn() to hopefully have different random vals
-            if (levelKeep % 2 == 0) {
+            if (levelKeep % 5 == 0) {
                 points = getSpawn();
                 handler.addObject(new BasicEnemy(points[0], points[1], ItemID.BasicEnemy, handler));
             }
-            if (levelKeep % 5 == 0) {
+            if (levelKeep % 13 == 0) {
                 points = getSpawn();
                 handler.addObject(new BigEnemy(points[0], points[1], ItemID.BasicEnemy, handler));
             }
-            if (levelKeep % 17 == 0) {
+            if (levelKeep % 29 == 0) {
                 points = getSpawn();
                 handler.addObject(new MegaEnemy(points[0], points[1], ItemID.MegaEnemy, handler));
             }

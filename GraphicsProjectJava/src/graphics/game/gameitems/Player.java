@@ -3,7 +3,6 @@ package graphics.game.gameitems;
 import graphics.game.*;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -71,7 +70,7 @@ public class Player extends GameItems {
                     HUD.playerHealth -= ((Enemy) tempObject).getDamage();
                     System.out.println("BONK -" + ((Enemy) tempObject).getDamage() + " " + HUD.playerHealth);
                     if (HUD.playerHealth <= 0) {
-                        Game.setPlayerDead(true);
+                        Game.killPlayer(true);
                     }
                 }
             }

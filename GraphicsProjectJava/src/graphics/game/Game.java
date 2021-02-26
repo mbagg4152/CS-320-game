@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable {
     }
     
     private static void assignObjectValues() {
-        bgMain = new Color(28, 28, 28);
+        bgMain = new Color(16, 26, 40);
         gameFrame = new JFrame("Start Menu");
         gamePanel = new JPanel(new GridLayout(0, 1, 10, 10));
         gameTitle = new JLabel("", JLabel.CENTER);

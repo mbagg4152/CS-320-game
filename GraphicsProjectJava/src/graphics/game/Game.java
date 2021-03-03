@@ -41,6 +41,7 @@ public class Game extends Canvas implements Runnable {
     private static Player character;
     public static Clip hitSound;
     public static BufferedImage titleIcon, btnIcon;
+    public static Image bgImage;
     
     public static void main(String[] args) {
         assignObjectValues();
@@ -54,8 +55,13 @@ public class Game extends Canvas implements Runnable {
         gameTitle = new JLabel("", JLabel.CENTER);
         startBtn = new JButton();
         try {
-            titleIcon = ImageIO.read(new File(PATH_TITLE));
-            btnIcon = ImageIO.read(new File(PATH_START));
+            bgImage = ImageIO.read(new File(IMG_BG));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            titleIcon = ImageIO.read(new File(IMG_TITLE));
+            btnIcon = ImageIO.read(new File(IMG_START));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,6 +117,7 @@ public class Game extends Canvas implements Runnable {
         gHandler.addObject(new BasicEnemy(randObj.nextInt(WIDTH), randObj
                 .nextInt(HEIGHT), ItemID.BasicEnemy, gHandler));
         
+        
         this.requestFocusInWindow();
     }
     
@@ -140,8 +147,7 @@ public class Game extends Canvas implements Runnable {
     public void run() {
         long lastTime = System.nanoTime();
         double amountOfTicks = 60;
-        double ns = 1000000000 / amountOfTicks;
-        double delta = 0;
+        double ns = 1000000000 / amountOfTicks, delta = 0;
         long timer = System.currentTimeMillis();
         while (running) {
             if (isPlayerDead()) {
@@ -179,13 +185,15 @@ public class Game extends Canvas implements Runnable {
         }
         
         Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.black);
+        g.setColor(COLOR_BASIC);
+        
+        
         g.fillRect(0, 0, WIDTH, HEIGHT);
+        g.drawImage(bgImage, 0, 0, WIDTH, HEIGHT, null);
         gHandler.render(g);
         hud.render(g);
         g.dispose();
         bs.show();
-        
     }
     
     public static int clamp(int var, int min, int max) {

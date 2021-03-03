@@ -1,5 +1,5 @@
 package graphics.game.gameitems;
 
 public enum ItemID {
-    Player(), Enemy, BasicEnemy, BigEnemy, MegaEnemy;
+    Player(), Enemy, BasicEnemy, FlameGuy, SlimeGirl, BigFella;
 }

@@ -1,10 +1,14 @@
 package graphics.game;
 
-import java.awt.Canvas;
-import java.awt.Dimension;
+import static graphics.game.Const.*;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serial;
 
-import javax.swing.JFrame;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class GameFrame extends Canvas {
     
@@ -17,10 +21,13 @@ public class GameFrame extends Canvas {
         frame.setMaximumSize(new Dimension(width, height));
         frame.setMinimumSize(new Dimension(width, height));
         
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.add(game);
+        frame.getContentPane().setBackground(Color.BLUE);
+        frame.pack();
         frame.setVisible(true);
         game.start();
         

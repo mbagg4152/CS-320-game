@@ -4,11 +4,11 @@ import graphics.game.GameHandler;
 
 import static graphics.game.Const.*;
 
-public class BigEnemy extends Enemy {
+public class FlameGuy extends Enemy {
     private GameHandler handler;
     
-    public BigEnemy(int x, int y, ItemID id, GameHandler handler) {
-        super(x, y, SIZE_BIG, 2, 2,4, id, handler, PATH_BIG_ICON, COLOR_BIG);
+    public FlameGuy(int x, int y, ItemID id, GameHandler handler) {
+        super(x, y, SIZE_FLAME, 2, 2,4, id, handler, ICON_FIRE, COLOR_FLAME);
         this.handler = handler;
     }
 }

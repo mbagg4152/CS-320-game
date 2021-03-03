@@ -25,7 +25,7 @@ public class Player extends GameItems {
     
     private void getIcon() {
         try {
-            playerIcon = ImageIO.read(new File(PATH_PLAYER_ICON));
+            playerIcon = ImageIO.read(new File(ICON_PLAYER));
         } catch (Exception e) {
             
             System.out.println(MessageFormat.format("Could not find player icon", e.toString()));

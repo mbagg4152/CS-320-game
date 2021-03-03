@@ -54,11 +54,15 @@ public class Spawn {
             }
             if (levelKeep % 13 == 0) {
                 points = getSpawn();
-                handler.addObject(new BigEnemy(points[0], points[1], ItemID.BasicEnemy, handler));
+                handler.addObject(new FlameGuy(points[0], points[1], ItemID.BasicEnemy, handler));
             }
             if (levelKeep % 29 == 0) {
                 points = getSpawn();
-                handler.addObject(new MegaEnemy(points[0], points[1], ItemID.MegaEnemy, handler));
+                handler.addObject(new SlimeGirl(points[0], points[1], ItemID.SlimeGirl, handler));
+            }
+            if (levelKeep % 59 == 0) {
+                points = getSpawn();
+                handler.addObject(new BigFella(points[0], points[1], ItemID.BigFella, handler));
             }
         }
         

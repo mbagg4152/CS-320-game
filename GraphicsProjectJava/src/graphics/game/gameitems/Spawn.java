@@ -48,7 +48,7 @@ public class Spawn {
             levelKeep++;
             hud.setLevel(hud.getLevel() + 1);
             int[] points; // make different calls to getSpawn() to hopefully have different random vals
-            if (levelKeep % 5 == 0) {
+            if (levelKeep % 3 == 0) {
                 points = getSpawn();
                 handler.addObject(new BasicEnemy(points[0], points[1], ItemID.BasicEnemy, handler));
             }

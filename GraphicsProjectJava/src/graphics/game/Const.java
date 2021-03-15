@@ -7,7 +7,6 @@ public class Const {
     
     // icon paths
     public static final String ICON_FELLA = USER_DIR + "/res/icons/big-purp.png";
-    public static final String ICON_BASIC = USER_DIR + "/res/icons/enemy-basic.png";
     public static final String ICON_FIRE = USER_DIR + "/res/icons/enemy-fire.png";
     public static final String ICON_PLAYER = USER_DIR + "/res/icons/player-blue.png";
     public static final String ICON_SLIME = USER_DIR + "/res/icons/enemy-slime.png";
@@ -16,8 +15,7 @@ public class Const {
     public static final String IMG_TITLE = USER_DIR + "/res/icons/title.png";
     
     // colors
-    public static final Color COLOR_BASIC = new Color(205, 137, 0);
-    public static final Color COLOR_FELLA = new Color(118, 0, 205);
+    public static final Color COLOR_BASIC = new Color(118, 0, 205);
     public static final Color COLOR_FLAME = new Color(176, 6, 42);
     public static final Color COLOR_PLAYER = new Color(27, 61, 163);
     public static final Color COLOR_SLIME = new Color(7, 154, 22);

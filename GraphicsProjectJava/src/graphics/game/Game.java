@@ -17,13 +17,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import static graphics.game.Const.*;
 
 public class Game extends Canvas implements Runnable {
-    
-    @Serial private static final long serialVersionUID = 1442501350474703598L;
+
+    @Serial
+    private static final long serialVersionUID = 1442501350474703598L;
     private GameHandler gHandler;
     private HUD hud;
     private Random randObj;
@@ -36,18 +39,24 @@ public class Game extends Canvas implements Runnable {
     private static boolean running = false, playerDead = false;
     public static Color bgMain;
     public static final int WIDTH = 1600, HEIGHT = 900;
-    
+
     private static GameFrame mainGameFrame;
     private static Player character;
     public static Clip hitSound;
     public static BufferedImage titleIcon, btnIcon;
     public static Image bgImage;
-    
+
+    public static Date startDate;
+    public static String startStr;
+    SimpleDateFormat sdf
+            = new SimpleDateFormat(
+            "dd-MM-yyyy HH:mm:ss");
+
     public static void main(String[] args) {
         assignObjectValues();
         startGameMenu();
     }
-    
+
     private static void assignObjectValues() {
         bgMain = new Color(16, 26, 40);
         gameFrame = new JFrame("Start Menu");
@@ -65,9 +74,9 @@ public class Game extends Canvas implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     private static void startGameMenu() {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); // get screen size
         // set up the main menu frame
@@ -76,26 +85,26 @@ public class Game extends Canvas implements Runnable {
         gameFrame.setLocation(dim.width / 2 - 500 / 2, dim.height / 2 - 500 / 2); // center panel
         gameFrame.setLayout(new GridLayout(0, 1));
         gameFrame.getContentPane().setBackground(bgMain);
-        
+
         // main menu panel
         gamePanel.setBorder(new EmptyBorder(5, 40, 50, 40));
         gamePanel.setBackground(bgMain);
-        
+
         // main menu title
         gameTitle.setIcon(new ImageIcon(titleIcon));
-        
+
         // create and change settings for the button
         startBtn.setBorderPainted(false);
         startBtn.setContentAreaFilled(false);
         startBtn.setIcon(new ImageIcon(btnIcon));
         startBtn.setFocusable(false);
-        
+
         // add UI elements to panel and then to JFrame
         gamePanel.add(gameTitle);
         gamePanel.add(startBtn);
         gameFrame.add(gamePanel);
         gameFrame.setVisible(true);
-        
+
         startBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,7 +113,7 @@ public class Game extends Canvas implements Runnable {
             }
         });
     }
-    
+
     public Game() {
         gHandler = new GameHandler();
         hud = new HUD();
@@ -116,17 +125,26 @@ public class Game extends Canvas implements Runnable {
         gHandler.addObject(character);
         gHandler.addObject(new BasicEnemy(randObj.nextInt(WIDTH), randObj
                 .nextInt(HEIGHT), ItemID.BasicEnemy, gHandler));
-        
-        
+
+        setDate(new Date());
         this.requestFocusInWindow();
     }
-    
+
+
+    public void setDate(Date date) {
+        startStr = sdf.format(date);
+    }
+
+    public static String getDate() {
+        return startStr;
+    }
+
     public synchronized void start() {
         thread = new Thread(this);
         thread.start();
         running = true;
     }
-    
+
     public synchronized void stop() {
         try {
             thread.join();
@@ -135,7 +153,7 @@ public class Game extends Canvas implements Runnable {
             e.printStackTrace();
         }
     }
-    
+
     public void resetGameVals() {
         gHandler = new GameHandler();
         hud = new HUD();
@@ -143,7 +161,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(gHandler));
         randObj = new Random();
     }
-    
+
     public void run() {
         long lastTime = System.nanoTime();
         double amountOfTicks = 60;
@@ -170,24 +188,24 @@ public class Game extends Canvas implements Runnable {
         }
         stop();
     }
-    
+
     private void tick() {
         gHandler.tick();
         hud.tick();
         spawner.tick();
     }
-    
+
     private void render() {
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
             this.createBufferStrategy(3);
             return;
         }
-        
+
         Graphics g = bs.getDrawGraphics();
         g.setColor(COLOR_FELLA);
-        
-        
+
+
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.drawImage(bgImage, 0, 0, WIDTH, HEIGHT, null);
         gHandler.render(g);
@@ -195,21 +213,23 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
     }
-    
+
     public static int clamp(int var, int min, int max) {
         if (var >= max) return max;
         else if (var <= min) return min;
         else return var;
     }
-    
+
     public static boolean isPlayerDead() {
         return playerDead;
     }
-    
+
     public static void killPlayer(boolean state) {
         playerDead = state;
     }
-    
-    public static Rectangle getPlayerBounds() { return character.getBounds(); }
-    
+
+    public static Rectangle getPlayerBounds() {
+        return character.getBounds();
+    }
+
 }

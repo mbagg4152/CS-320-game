@@ -5,28 +5,27 @@ import graphics.game.gameitems.ItemID;
 import graphics.game.gameitems.Player;
 import graphics.game.gameitems.Spawn;
 
-import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serial;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.Scanner;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import static graphics.game.Const.*;
 
 public class Game extends Canvas implements Runnable {
 
-    @Serial
-    private static final long serialVersionUID = 1442501350474703598L;
+    @Serial private static final long serialVersionUID = 1442501350474703598L;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     private GameHandler gHandler;
     private HUD hud;
     private Random randObj;
@@ -34,23 +33,16 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private static JButton startBtn;
     private static JFrame gameFrame;
-    private static JLabel gameTitle;
+    private static JLabel gameTitle, timeLabel;
     private static JPanel gamePanel;
-    private static boolean running = false, playerDead = false;
-    public static Color bgMain;
-    public static final int WIDTH = 1600, HEIGHT = 900;
-
-    private static GameFrame mainGameFrame;
     private static Player character;
-    public static Clip hitSound;
-    public static BufferedImage titleIcon, btnIcon;
+    private static boolean running = false, playerDead = false;
+    private static int deadCount = 0;
+    public static BufferedImage titleIcon, btnIcon, diedIcon, againIcon;
+    public static Color bgMain;
     public static Image bgImage;
-
-    public static Date startDate;
-    public static String startStr;
-    SimpleDateFormat sdf
-            = new SimpleDateFormat(
-            "dd-MM-yyyy HH:mm:ss");
+    public static String startStr, pastTime;
+    public static final int WIDTH = 1600, HEIGHT = 900;
 
     public static void main(String[] args) {
         assignObjectValues();
@@ -63,18 +55,25 @@ public class Game extends Canvas implements Runnable {
         gamePanel = new JPanel(new GridLayout(0, 1, 10, 10));
         gameTitle = new JLabel("", JLabel.CENTER);
         startBtn = new JButton();
+
         try {
             bgImage = ImageIO.read(new File(IMG_BG));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
             titleIcon = ImageIO.read(new File(IMG_TITLE));
             btnIcon = ImageIO.read(new File(IMG_START));
+            diedIcon = ImageIO.read(new File(IMG_DIED));
+            againIcon = ImageIO.read(new File(IMG_AGAIN));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        if (deadCount == 0) {
+            try {
+                setPastTime(new Scanner(new File(PAST_TIME)).useDelimiter("\\Z").next());
+                System.out.println(pastTime);
+            } catch (FileNotFoundException | NoSuchElementException e) {
+                setPastTime("0 hrs. 0 min. 0.0 sec.");
+            }
+        }
     }
 
     private static void startGameMenu() {
@@ -90,17 +89,29 @@ public class Game extends Canvas implements Runnable {
         gamePanel.setBorder(new EmptyBorder(5, 40, 50, 40));
         gamePanel.setBackground(bgMain);
 
-        // main menu title
-        gameTitle.setIcon(new ImageIcon(titleIcon));
 
         // create and change settings for the button
         startBtn.setBorderPainted(false);
         startBtn.setContentAreaFilled(false);
-        startBtn.setIcon(new ImageIcon(btnIcon));
         startBtn.setFocusable(false);
+
+        // main menu title & button icons
+        if (deadCount == 0) {
+            gameTitle.setIcon(new ImageIcon(titleIcon));
+            startBtn.setIcon(new ImageIcon(btnIcon));
+        } else {
+            gameTitle.setIcon(new ImageIcon(diedIcon));
+            startBtn.setIcon(new ImageIcon(againIcon));
+        }
+
+        timeLabel = new JLabel("You lasted: " + pastTime, SwingConstants.CENTER);
+        timeLabel.setForeground(Color.LIGHT_GRAY);
+        timeLabel.setFont(new Font("System", Font.ITALIC, 20));
+
 
         // add UI elements to panel and then to JFrame
         gamePanel.add(gameTitle);
+        if (deadCount != 0) gamePanel.add(timeLabel);
         gamePanel.add(startBtn);
         gameFrame.add(gamePanel);
         gameFrame.setVisible(true);
@@ -119,7 +130,7 @@ public class Game extends Canvas implements Runnable {
         hud = new HUD();
         spawner = new Spawn(gHandler, hud);
         this.addKeyListener(new KeyInput(gHandler));
-        mainGameFrame = new GameFrame(WIDTH, HEIGHT, "Run! Dodge! Run!", this);
+        GameFrame mainGameFrame = new GameFrame(WIDTH, HEIGHT, "Run! Dodge! Run!", this);
         randObj = new Random();
         character = new Player((WIDTH / 2) - 32, (HEIGHT / 2) - 32, ItemID.Player, gHandler);
         gHandler.addObject(character);
@@ -130,14 +141,6 @@ public class Game extends Canvas implements Runnable {
         this.requestFocusInWindow();
     }
 
-
-    public void setDate(Date date) {
-        startStr = sdf.format(date);
-    }
-
-    public static String getDate() {
-        return startStr;
-    }
 
     public synchronized void start() {
         thread = new Thread(this);
@@ -169,6 +172,8 @@ public class Game extends Canvas implements Runnable {
         long timer = System.currentTimeMillis();
         while (running) {
             if (isPlayerDead()) {
+                writePastTime(pastTime);
+                deadCount++;
                 gHandler.removeAll();
                 GameFrame.deleteWindow();
                 resetGameVals();
@@ -183,7 +188,13 @@ public class Game extends Canvas implements Runnable {
                 tick();
                 delta--;
             }
-            if (running) render();
+            if (running) {
+                try {
+                    render();
+                } catch (IllegalStateException e) {
+                    System.out.println("");
+                }
+            }
             if (System.currentTimeMillis() - timer > 1000) timer += 1000;
         }
         stop();
@@ -204,8 +215,6 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
         g.setColor(COLOR_FELLA);
-
-
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.drawImage(bgImage, 0, 0, WIDTH, HEIGHT, null);
         gHandler.render(g);
@@ -230,6 +239,33 @@ public class Game extends Canvas implements Runnable {
 
     public static Rectangle getPlayerBounds() {
         return character.getBounds();
+    }
+
+    public void setDate(Date date) {
+        startStr = sdf.format(date);
+    }
+
+    public static String getDate() {
+        return startStr;
+    }
+
+    public static String getPastTime() {
+        return pastTime;
+    }
+
+    public static void setPastTime(String time) {
+        pastTime = time;
+
+    }
+
+    public static void writePastTime(String time) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(PAST_TIME));
+            bw.write(time);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

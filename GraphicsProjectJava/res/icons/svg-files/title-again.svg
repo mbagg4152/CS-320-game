@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800"
+   height="150"
+   viewBox="0 0 211.66666 39.687501"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="title-again.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   inkscape:export-filename="C:\Users\maggs\OneDrive\Desktop\cs-320-game\GraphicsProjectJava\res\icons\title-again.png"
+   inkscape:export-xdpi="102.272"
+   inkscape:export-ydpi="102.272">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient929">
+      <stop
+         style="stop-color:#00abc9;stop-opacity:1"
+         offset="0"
+         id="stop925" />
+      <stop
+         style="stop-color:#006bda;stop-opacity:1"
+         offset="1"
+         id="stop927" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient929"
+       id="linearGradient931"
+       x1="94.608192"
+       y1="8.0119066"
+       x2="94.966728"
+       y2="32.908688"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.44564737,0,0,0.44564737,1.5695756,4.8205312)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="199.97675"
+     inkscape:cy="323.08745"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     units="px" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46667px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:url(#linearGradient931);fill-opacity:1;stroke:none;stroke-width:0.291523;stroke-miterlimit:4;stroke-dasharray:none"
+       x="1.9607416"
+       y="17.703852"
+       id="text835"
+       inkscape:export-filename="C:\Users\maggs\OneDrive\Desktop\cs-320-game\GraphicsProjectJava\res\icons\title-again.png"
+       inkscape:export-xdpi="102.272"
+       inkscape:export-ydpi="102.272"><tspan
+         id="tspan833"
+         x="1.9607416"
+         y="17.703852"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46667px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:url(#linearGradient931);fill-opacity:1;stroke-width:0.291523;stroke-miterlimit:4;stroke-dasharray:none"
+         sodipodi:role="line">Oh No! You Died! :(</tspan></text>
+  </g>
+</svg>

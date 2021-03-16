@@ -20,20 +20,14 @@ public class Const {
             PAST_TIME = USER_DIR + "/res/past-time.txt";
 
     // colors
-    public static final Color COLOR_FELLA = new Color(118, 0, 205);
-    public static final Color COLOR_BASIC = new Color(78, 78, 78);
-    public static final Color COLOR_FLAME = new Color(176, 6, 42);
-    public static final Color COLOR_PLAYER = new Color(27, 61, 163);
-    public static final Color COLOR_SLIME = new Color(7, 154, 22);
-
-    // sound paths
-    public static final String OOF_ROBLOX = USER_DIR + "/res/sound/oof_roblox.wav";
+    public static final Color
+            COLOR_FELLA = new Color(118, 0, 205),
+            COLOR_BASIC = new Color(78, 78, 78),
+            COLOR_FLAME = new Color(176, 6, 42),
+            COLOR_PLAYER = new Color(27, 61, 163),
+            COLOR_SLIME = new Color(7, 154, 22);
 
     // sizes
-    public static final int SIZE_BASIC = 48;
-    public static final int SIZE_FLAME = 96;
-    public static final int SIZE_PLAYER = 96;
-    public static final int SIZE_SLIME = 128;
-    public static final int SIZE_FELLA = 216;
+    public static final int SIZE_BASIC = 48, SIZE_FLAME = 96, SIZE_PLAYER = 96, SIZE_SLIME = 128, SIZE_FELLA = 216;
 
 }

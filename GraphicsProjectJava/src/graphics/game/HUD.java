@@ -35,10 +35,9 @@ public class HUD {
         g.fillRect(15, 25, playerHealth * 2, 32);
         g.setColor(Color.white);
         g.drawRect(15, 25, 200, 32);
-        g.setFont(new Font("TimesRoman", Font.BOLD, 14));
+        g.setFont(new Font("System", Font.BOLD, 14));
+
         now = new Date();
-
-
         try {
             start = sdf.parse(Game.getDate());
         } catch (ParseException e) {
@@ -48,14 +47,13 @@ public class HUD {
 
         long diff = now.getTime() - start.getTime();
         long ms = diff % 1000, sec = (diff / 1000) % 60, min = (diff / (1000 * 60)) % 60, hrs = (diff / (1000 * 60 * 60)) % 24;
-
         thisTime = hrs + " hr. " + min + " min. " + sec + "." + ms + " sec.";
 
         g.drawString("Health: " + playerHealth, 15, 15);
         g.drawString("Current time: " + thisTime, 230, 55);
         g.drawString("Past time: " + Game.getPastTime(), 230, 35);
 
-        if (playerHealth <= 15) {
+        if (playerHealth <= 10) {
             System.out.println(thisTime);
             Game.setPastTime(thisTime);
         }

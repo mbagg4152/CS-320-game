@@ -71,7 +71,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="136.19944"
+     inkscape:cx="102.10679"
      inkscape:cy="43.210526"
      inkscape:document-units="mm"
      inkscape:current-layer="g1993"
@@ -154,14 +154,14 @@
          transform="matrix(3.8306053,0,0,0.89912643,-27.379183,13.164136)" />
       <text
          xml:space="preserve"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.029px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;mix-blend-mode:overlay;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.603446;stroke-miterlimit:4;stroke-dasharray:none"
-         x="42.63031"
-         y="27.941486"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.029px;line-height:1.25;font-family:Corbel;-inkscape-font-specification:'Corbel, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;mix-blend-mode:overlay;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.603446;stroke-miterlimit:4;stroke-dasharray:none"
+         x="47.015293"
+         y="25.310497"
          id="text1991"><tspan
            id="tspan1989"
-           x="42.63031"
-           y="27.941486"
-           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.029px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke-width:0.603446;stroke-miterlimit:4;stroke-dasharray:none"
+           x="47.015293"
+           y="25.310497"
+           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.029px;font-family:Corbel;-inkscape-font-specification:'Corbel, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke-width:0.603446;stroke-miterlimit:4;stroke-dasharray:none"
            sodipodi:role="line">Play Again?</tspan></text>
     </g>
   </g>

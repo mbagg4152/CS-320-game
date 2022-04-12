@@ -1,2 +1,2 @@
 # cs-320-game
-Repo for our game project
+Repo for computer graphic's project: a simple game written in Java.
